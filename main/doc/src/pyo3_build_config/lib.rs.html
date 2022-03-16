@@ -299,7 +299,7 @@
             <span class="ident">InterpreterConfig::from_reader</span>(<span class="ident">Cursor::new</span>(<span class="ident">CONFIG_FILE</span>))
         } <span class="kw">else</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">ABI3_CONFIG</span>.<span class="ident">is_empty</span>() {
             <span class="prelude-val">Ok</span>(<span class="ident">abi3_config</span>())
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">impl_::any_cross_compiling_env_vars_set</span>() {
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">impl_::cross_compile_env_vars</span>().<span class="ident">any</span>() {
             <span class="ident">InterpreterConfig::from_path</span>(<span class="ident">DEFAULT_CROSS_COMPILE_CONFIG_PATH</span>)
         } <span class="kw">else</span> {
             <span class="ident">InterpreterConfig::from_reader</span>(<span class="ident">Cursor::new</span>(<span class="ident">HOST_CONFIG</span>))
