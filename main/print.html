@@ -5836,7 +5836,7 @@ For a detailed list of all changes, see the <a href="changelog.html">CHANGELOG</
 <h2 id="from-015-to-016"><a class="header" href="#from-015-to-016">from 0.15.* to 0.16</a></h2>
 <h3 id="drop-support-for-older-technologies"><a class="header" href="#drop-support-for-older-technologies">Drop support for older technologies</a></h3>
 <p>PyO3 0.16 has increased minimum Rust version to 1.48 and minimum Python version to 3.7. This enables use of newer language features (enabling some of the other additions in 0.16) and simplifies maintenance of the project.</p>
-<p>### <code>#[pyproto]</code> has been deprecated</p>
+<h3 id="pyproto-has-been-deprecated"><a class="header" href="#pyproto-has-been-deprecated"><code>#[pyproto]</code> has been deprecated</a></h3>
 <p>In PyO3 0.15, the <code>#[pymethods]</code> attribute macro gained support for implementing &quot;magic methods&quot; such as <code>__str__</code> (aka &quot;dunder&quot; methods). This implementation was not quite finalized at the time, with a few edge cases to be decided upon. The existing <code>#[pyproto]</code> attribute macro was left untouched, because it covered these edge cases.</p>
 <p>In PyO3 0.16, the <code>#[pymethods]</code> implementation has been completed and is now the preferred way to implement magic methods. To allow the PyO3 project to move forward, <code>#[pyproto]</code> has been deprecated (with expected removal in PyO3 0.18).</p>
 <p>Migration from <code>#[pyproto]</code> to <code>#[pymethods]</code> is straightforward; copying the existing methods directly from the <code>#[pyproto]</code> trait implementation is all that is needed in most cases.</p>
