@@ -1,7 +1,5 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `pyo3-build-config/src/impl_.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>impl_.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../scrape-examples.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><div class='internal-banner' style='position:fixed; z-index: 99999; color:red;border:3px solid red;margin-left: auto; margin-right: auto; width: 430px;left:0;right: 0;'><div style='display: flex; align-items: center; justify-content: center;'> ⚠️ Internal Docs ⚠️ Not Public API 👉 <a href='https://pyo3.rs/main/doc/pyo3/index.html' style='color:red;text-decoration:underline;'>Official Docs Here</a></div></div>
-
-<nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../pyo3_build_config/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
+    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../pyo3_build_config/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
     <nav class="sidebar"><a class="sidebar-logo" href="../../pyo3_build_config/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
@@ -1752,6 +1750,110 @@
 <span id="1745">1745</span>
 <span id="1746">1746</span>
 <span id="1747">1747</span>
+<span id="1748">1748</span>
+<span id="1749">1749</span>
+<span id="1750">1750</span>
+<span id="1751">1751</span>
+<span id="1752">1752</span>
+<span id="1753">1753</span>
+<span id="1754">1754</span>
+<span id="1755">1755</span>
+<span id="1756">1756</span>
+<span id="1757">1757</span>
+<span id="1758">1758</span>
+<span id="1759">1759</span>
+<span id="1760">1760</span>
+<span id="1761">1761</span>
+<span id="1762">1762</span>
+<span id="1763">1763</span>
+<span id="1764">1764</span>
+<span id="1765">1765</span>
+<span id="1766">1766</span>
+<span id="1767">1767</span>
+<span id="1768">1768</span>
+<span id="1769">1769</span>
+<span id="1770">1770</span>
+<span id="1771">1771</span>
+<span id="1772">1772</span>
+<span id="1773">1773</span>
+<span id="1774">1774</span>
+<span id="1775">1775</span>
+<span id="1776">1776</span>
+<span id="1777">1777</span>
+<span id="1778">1778</span>
+<span id="1779">1779</span>
+<span id="1780">1780</span>
+<span id="1781">1781</span>
+<span id="1782">1782</span>
+<span id="1783">1783</span>
+<span id="1784">1784</span>
+<span id="1785">1785</span>
+<span id="1786">1786</span>
+<span id="1787">1787</span>
+<span id="1788">1788</span>
+<span id="1789">1789</span>
+<span id="1790">1790</span>
+<span id="1791">1791</span>
+<span id="1792">1792</span>
+<span id="1793">1793</span>
+<span id="1794">1794</span>
+<span id="1795">1795</span>
+<span id="1796">1796</span>
+<span id="1797">1797</span>
+<span id="1798">1798</span>
+<span id="1799">1799</span>
+<span id="1800">1800</span>
+<span id="1801">1801</span>
+<span id="1802">1802</span>
+<span id="1803">1803</span>
+<span id="1804">1804</span>
+<span id="1805">1805</span>
+<span id="1806">1806</span>
+<span id="1807">1807</span>
+<span id="1808">1808</span>
+<span id="1809">1809</span>
+<span id="1810">1810</span>
+<span id="1811">1811</span>
+<span id="1812">1812</span>
+<span id="1813">1813</span>
+<span id="1814">1814</span>
+<span id="1815">1815</span>
+<span id="1816">1816</span>
+<span id="1817">1817</span>
+<span id="1818">1818</span>
+<span id="1819">1819</span>
+<span id="1820">1820</span>
+<span id="1821">1821</span>
+<span id="1822">1822</span>
+<span id="1823">1823</span>
+<span id="1824">1824</span>
+<span id="1825">1825</span>
+<span id="1826">1826</span>
+<span id="1827">1827</span>
+<span id="1828">1828</span>
+<span id="1829">1829</span>
+<span id="1830">1830</span>
+<span id="1831">1831</span>
+<span id="1832">1832</span>
+<span id="1833">1833</span>
+<span id="1834">1834</span>
+<span id="1835">1835</span>
+<span id="1836">1836</span>
+<span id="1837">1837</span>
+<span id="1838">1838</span>
+<span id="1839">1839</span>
+<span id="1840">1840</span>
+<span id="1841">1841</span>
+<span id="1842">1842</span>
+<span id="1843">1843</span>
+<span id="1844">1844</span>
+<span id="1845">1845</span>
+<span id="1846">1846</span>
+<span id="1847">1847</span>
+<span id="1848">1848</span>
+<span id="1849">1849</span>
+<span id="1850">1850</span>
+<span id="1851">1851</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">collections</span>::{<span class="ident">HashMap</span>, <span class="ident">HashSet</span>},
     <span class="ident">convert::AsRef</span>,
@@ -2053,6 +2155,11 @@ print(&quot;mingw&quot;, get_platform().startswith(&quot;mingw&quot;))
             <span class="prelude-val">Some</span>(<span class="string">&quot;0&quot;</span>) <span class="op">|</span> <span class="prelude-val">Some</span>(<span class="string">&quot;false&quot;</span>) <span class="op">|</span> <span class="prelude-val">Some</span>(<span class="string">&quot;False&quot;</span>) =&gt; <span class="bool-val">false</span>,
             <span class="kw">_</span> =&gt; <span class="macro">bail!</span>(<span class="string">&quot;expected a bool (1/true/True or 0/false/False) for Py_ENABLE_SHARED&quot;</span>),
         };
+        <span class="comment">// macOS framework packages use shared linking (PYTHONFRAMEWORK is the framework name, hence the empty check)</span>
+        <span class="kw">let</span> <span class="ident">framework</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">sysconfigdata</span>.<span class="ident">get_value</span>(<span class="string">&quot;PYTHONFRAMEWORK&quot;</span>) {
+            <span class="prelude-val">Some</span>(<span class="ident">s</span>) =&gt; <span class="op">!</span><span class="ident">s</span>.<span class="ident">is_empty</span>(),
+            <span class="kw">_</span> =&gt; <span class="bool-val">false</span>,
+        };
         <span class="kw">let</span> <span class="ident">lib_dir</span> <span class="op">=</span> <span class="macro">get_key!</span>(<span class="ident">sysconfigdata</span>, <span class="string">&quot;LIBDIR&quot;</span>).<span class="ident">ok</span>().<span class="ident">map</span>(<span class="ident">str::to_string</span>);
         <span class="kw">let</span> <span class="ident">lib_name</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">default_lib_name_unix</span>(
             <span class="ident">version</span>,
@@ -2067,7 +2174,7 @@ print(&quot;mingw&quot;, get_platform().startswith(&quot;mingw&quot;))
         <span class="prelude-val">Ok</span>(<span class="ident">InterpreterConfig</span> {
             <span class="ident">implementation</span>,
             <span class="ident">version</span>,
-            <span class="ident">shared</span>,
+            <span class="ident">shared</span>: <span class="ident">shared</span> <span class="op">|</span><span class="op">|</span> <span class="ident">framework</span>,
             <span class="ident">abi3</span>: <span class="ident">is_abi3</span>(),
             <span class="ident">lib_dir</span>,
             <span class="ident">lib_name</span>,
@@ -2294,6 +2401,54 @@ print(&quot;mingw&quot;, get_platform().startswith(&quot;mingw&quot;))
     <span class="ident">cargo_env_var</span>(<span class="string">&quot;CARGO_FEATURE_ABI3&quot;</span>).<span class="ident">is_some</span>()
 }
 
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">PartialEq</span>)]</span>
+<span class="kw">struct</span> <span class="ident">TargetInfo</span> {
+    <span class="doccomment">/// The `arch` component of the compilation target triple.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// e.g. x86_64, i386, arm, thumb, mips, etc.</span>
+    <span class="ident">arch</span>: <span class="ident">String</span>,
+
+    <span class="doccomment">/// The `vendor` component of the compilation target triple.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// e.g. apple, pc, unknown, etc.</span>
+    <span class="ident">vendor</span>: <span class="ident">String</span>,
+
+    <span class="doccomment">/// The `os` component of the compilation target triple.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// e.g. darwin, freebsd, linux, windows, etc.</span>
+    <span class="ident">os</span>: <span class="ident">String</span>,
+}
+
+<span class="kw">impl</span> <span class="ident">TargetInfo</span> {
+    <span class="kw">fn</span> <span class="ident">from_cargo_env</span>() -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="prelude-val">Ok</span>(<span class="self">Self</span> {
+            <span class="ident">arch</span>: <span class="ident">cargo_env_var</span>(<span class="string">&quot;CARGO_CFG_TARGET_ARCH&quot;</span>)
+                .<span class="ident">ok_or</span>(<span class="string">&quot;expected CARGO_CFG_TARGET_ARCH env var&quot;</span>)<span class="question-mark">?</span>,
+            <span class="ident">vendor</span>: <span class="ident">cargo_env_var</span>(<span class="string">&quot;CARGO_CFG_TARGET_VENDOR&quot;</span>)
+                .<span class="ident">ok_or</span>(<span class="string">&quot;expected CARGO_CFG_TARGET_VENDOR env var&quot;</span>)<span class="question-mark">?</span>,
+            <span class="ident">os</span>: <span class="ident">cargo_env_var</span>(<span class="string">&quot;CARGO_CFG_TARGET_OS&quot;</span>)
+                .<span class="ident">ok_or</span>(<span class="string">&quot;expected CARGO_CFG_TARGET_OS env var&quot;</span>)<span class="question-mark">?</span>,
+        })
+    }
+
+    <span class="kw">fn</span> <span class="ident">to_target_triple</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">String</span> {
+        <span class="macro">format!</span>(
+            <span class="string">&quot;{}-{}-{}&quot;</span>,
+            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arch</span> <span class="op">==</span> <span class="string">&quot;x86&quot;</span> {
+                <span class="string">&quot;i686&quot;</span>
+            } <span class="kw">else</span> {
+                <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">arch</span>
+            },
+            <span class="self">self</span>.<span class="ident">vendor</span>,
+            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">os</span> <span class="op">==</span> <span class="string">&quot;macos&quot;</span> {
+                <span class="string">&quot;darwin&quot;</span>
+            } <span class="kw">else</span> {
+                <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">os</span>
+            }
+        )
+    }
+}
+
 <span class="doccomment">/// Configuration needed by PyO3 to cross-compile for a target platform.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Usually this is collected from the environment (i.e. `PYO3_CROSS_*` and `CARGO_CFG_TARGET_*`)</span>
@@ -2306,51 +2461,55 @@ print(&quot;mingw&quot;, get_platform().startswith(&quot;mingw&quot;))
     <span class="doccomment">/// The version of the Python library to link against.</span>
     <span class="ident">version</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PythonVersion</span><span class="op">&gt;</span>,
 
-    <span class="doccomment">/// The `arch` component of the compilaton target triple.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// e.g. x86_64, i386, arm, thumb, mips, etc.</span>
-    <span class="ident">arch</span>: <span class="ident">String</span>,
-
-    <span class="doccomment">/// The `vendor` component of the compilaton target triple.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// e.g. apple, pc, unknown, etc.</span>
-    <span class="ident">vendor</span>: <span class="ident">String</span>,
-
-    <span class="doccomment">/// The `os` component of the compilaton target triple.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// e.g. darwin, freebsd, linux, windows, etc.</span>
-    <span class="ident">os</span>: <span class="ident">String</span>,
+    <span class="doccomment">/// The target information</span>
+    <span class="ident">target_info</span>: <span class="ident">TargetInfo</span>,
 }
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">any_cross_compiling_env_vars_set</span>() -&gt; <span class="ident">bool</span> {
-    <span class="ident">env::var_os</span>(<span class="string">&quot;PYO3_CROSS&quot;</span>).<span class="ident">is_some</span>()
-        <span class="op">|</span><span class="op">|</span> <span class="ident">env::var_os</span>(<span class="string">&quot;PYO3_CROSS_LIB_DIR&quot;</span>).<span class="ident">is_some</span>()
-        <span class="op">|</span><span class="op">|</span> <span class="ident">env::var_os</span>(<span class="string">&quot;PYO3_CROSS_PYTHON_VERSION&quot;</span>).<span class="ident">is_some</span>()
+<span class="kw">impl</span> <span class="ident">CrossCompileConfig</span> {
+    <span class="kw">fn</span> <span class="ident">from_env_vars</span>(<span class="ident">env_vars</span>: <span class="ident">CrossCompileEnvVars</span>, <span class="ident">target_info</span>: <span class="ident">TargetInfo</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="prelude-val">Ok</span>(<span class="ident">CrossCompileConfig</span> {
+            <span class="ident">lib_dir</span>: <span class="ident">env_vars</span>
+                .<span class="ident">pyo3_cross_lib_dir</span>
+                .<span class="ident">ok_or</span>(
+                    <span class="string">&quot;The PYO3_CROSS_LIB_DIR environment variable must be set when cross-compiling&quot;</span>,
+                )<span class="question-mark">?</span>
+                .<span class="ident">into</span>(),
+            <span class="ident">target_info</span>,
+            <span class="ident">version</span>: <span class="ident">env_vars</span>
+                .<span class="ident">pyo3_cross_python_version</span>
+                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">os_string</span><span class="op">|</span> {
+                    <span class="kw">let</span> <span class="ident">utf8_str</span> <span class="op">=</span> <span class="ident">os_string</span>
+                        .<span class="ident">to_str</span>()
+                        .<span class="ident">ok_or</span>(<span class="string">&quot;PYO3_CROSS_PYTHON_VERSION is not valid utf-8.&quot;</span>)<span class="question-mark">?</span>;
+                    <span class="ident">utf8_str</span>
+                        .<span class="ident">parse</span>()
+                        .<span class="ident">context</span>(<span class="string">&quot;failed to parse PYO3_CROSS_PYTHON_VERSION&quot;</span>)
+                })
+                .<span class="ident">transpose</span>()<span class="question-mark">?</span>,
+        })
+    }
 }
 
-<span class="kw">fn</span> <span class="ident">cross_compiling_from_cargo_env</span>() -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CrossCompileConfig</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">host</span> <span class="op">=</span> <span class="ident">cargo_env_var</span>(<span class="string">&quot;HOST&quot;</span>).<span class="ident">ok_or</span>(<span class="string">&quot;expected HOST env var&quot;</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">target</span> <span class="op">=</span> <span class="ident">cargo_env_var</span>(<span class="string">&quot;TARGET&quot;</span>).<span class="ident">ok_or</span>(<span class="string">&quot;expected TARGET env var&quot;</span>)<span class="question-mark">?</span>;
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">CrossCompileEnvVars</span> {
+    <span class="ident">pyo3_cross</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">OsString</span><span class="op">&gt;</span>,
+    <span class="ident">pyo3_cross_lib_dir</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">OsString</span><span class="op">&gt;</span>,
+    <span class="ident">pyo3_cross_python_version</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">OsString</span><span class="op">&gt;</span>,
+}
 
-    <span class="kw">if</span> <span class="ident">host</span> <span class="op">==</span> <span class="ident">target</span> {
-        <span class="comment">// Definitely not cross compiling if the host matches the target</span>
-        <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>);
+<span class="kw">impl</span> <span class="ident">CrossCompileEnvVars</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">any</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="ident">pyo3_cross</span>.<span class="ident">is_some</span>()
+            <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">pyo3_cross_lib_dir</span>.<span class="ident">is_some</span>()
+            <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">pyo3_cross_python_version</span>.<span class="ident">is_some</span>()
     }
+}
 
-    <span class="kw">if</span> <span class="ident">target</span> <span class="op">==</span> <span class="string">&quot;i686-pc-windows-msvc&quot;</span> <span class="op">&amp;&amp;</span> <span class="ident">host</span> <span class="op">==</span> <span class="string">&quot;x86_64-pc-windows-msvc&quot;</span> {
-        <span class="comment">// Not cross-compiling to compile for 32-bit Python from windows 64-bit</span>
-        <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>);
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">cross_compile_env_vars</span>() -&gt; <span class="ident">CrossCompileEnvVars</span> {
+    <span class="ident">CrossCompileEnvVars</span> {
+        <span class="ident">pyo3_cross</span>: <span class="ident">env::var_os</span>(<span class="string">&quot;PYO3_CROSS&quot;</span>),
+        <span class="ident">pyo3_cross_lib_dir</span>: <span class="ident">env::var_os</span>(<span class="string">&quot;PYO3_CROSS_LIB_DIR&quot;</span>),
+        <span class="ident">pyo3_cross_python_version</span>: <span class="ident">env::var_os</span>(<span class="string">&quot;PYO3_CROSS_PYTHON_VERSION&quot;</span>),
     }
-
-    <span class="kw">let</span> <span class="ident">target_arch</span> <span class="op">=</span>
-        <span class="ident">cargo_env_var</span>(<span class="string">&quot;CARGO_CFG_TARGET_ARCH&quot;</span>).<span class="ident">ok_or</span>(<span class="string">&quot;expected CARGO_CFG_TARGET_ARCH env var&quot;</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">target_vendor</span> <span class="op">=</span> <span class="ident">cargo_env_var</span>(<span class="string">&quot;CARGO_CFG_TARGET_VENDOR&quot;</span>)
-        .<span class="ident">ok_or</span>(<span class="string">&quot;expected CARGO_CFG_TARGET_VENDOR env var&quot;</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">target_os</span> <span class="op">=</span>
-        <span class="ident">cargo_env_var</span>(<span class="string">&quot;CARGO_CFG_TARGET_OS&quot;</span>).<span class="ident">ok_or</span>(<span class="string">&quot;expected CARGO_CFG_TARGET_OS env var&quot;</span>)<span class="question-mark">?</span>;
-
-    <span class="ident">cross_compiling</span>(<span class="kw-2">&amp;</span><span class="ident">host</span>, <span class="kw-2">&amp;</span><span class="ident">target_arch</span>, <span class="kw-2">&amp;</span><span class="ident">target_vendor</span>, <span class="kw-2">&amp;</span><span class="ident">target_os</span>)
 }
 
 <span class="doccomment">/// Detect whether we are cross compiling and return an assembled CrossCompileConfig if so.</span>
@@ -2373,62 +2532,33 @@ print(&quot;mingw&quot;, get_platform().startswith(&quot;mingw&quot;))
     <span class="ident">target_vendor</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
     <span class="ident">target_os</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
 ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CrossCompileConfig</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">cross</span> <span class="op">=</span> <span class="ident">env_var</span>(<span class="string">&quot;PYO3_CROSS&quot;</span>);
-    <span class="kw">let</span> <span class="ident">cross_lib_dir</span> <span class="op">=</span> <span class="ident">env_var</span>(<span class="string">&quot;PYO3_CROSS_LIB_DIR&quot;</span>);
-    <span class="kw">let</span> <span class="ident">cross_python_version</span> <span class="op">=</span> <span class="ident">env_var</span>(<span class="string">&quot;PYO3_CROSS_PYTHON_VERSION&quot;</span>);
+    <span class="kw">let</span> <span class="ident">env_vars</span> <span class="op">=</span> <span class="ident">cross_compile_env_vars</span>();
 
-    <span class="kw">let</span> <span class="ident">target_triple</span> <span class="op">=</span> <span class="macro">format!</span>(
-        <span class="string">&quot;{}-{}-{}&quot;</span>,
-        <span class="ident">target_arch</span>,
-        <span class="ident">target_vendor</span>,
-        <span class="kw">if</span> <span class="ident">target_os</span> <span class="op">==</span> <span class="string">&quot;macos&quot;</span> {
-            <span class="string">&quot;darwin&quot;</span>
-        } <span class="kw">else</span> {
-            <span class="ident">target_os</span>
-        }
-    );
+    <span class="kw">let</span> <span class="ident">target_info</span> <span class="op">=</span> <span class="ident">TargetInfo</span> {
+        <span class="ident">arch</span>: <span class="ident">target_arch</span>.<span class="ident">to_owned</span>(),
+        <span class="ident">vendor</span>: <span class="ident">target_vendor</span>.<span class="ident">to_owned</span>(),
+        <span class="ident">os</span>: <span class="ident">target_os</span>.<span class="ident">to_owned</span>(),
+    };
 
-    <span class="kw">if</span> <span class="ident">cross</span>.<span class="ident">is_none</span>() <span class="op">&amp;&amp;</span> <span class="ident">cross_lib_dir</span>.<span class="ident">is_none</span>() <span class="op">&amp;&amp;</span> <span class="ident">cross_python_version</span>.<span class="ident">is_none</span>() {
-        <span class="comment">// No cross-compiling environment variables set; try to determine if this is a known case</span>
-        <span class="comment">// which is not cross-compilation.</span>
-
-        <span class="kw">if</span> <span class="ident">target_triple</span> <span class="op">==</span> <span class="string">&quot;x86_64-apple-darwin&quot;</span> <span class="op">&amp;&amp;</span> <span class="ident">host</span> <span class="op">==</span> <span class="string">&quot;aarch64-apple-darwin&quot;</span> {
-            <span class="comment">// Not cross-compiling to compile for x86-64 Python from macOS arm64</span>
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>);
-        }
-
-        <span class="kw">if</span> <span class="ident">target_triple</span> <span class="op">==</span> <span class="string">&quot;aarch64-apple-darwin&quot;</span> <span class="op">&amp;&amp;</span> <span class="ident">host</span> <span class="op">==</span> <span class="string">&quot;x86_64-apple-darwin&quot;</span> {
-            <span class="comment">// Not cross-compiling to compile for arm64 Python from macOS x86_64</span>
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>);
-        }
-
-        <span class="kw">if</span> <span class="ident">host</span>.<span class="ident">starts_with</span>(<span class="kw-2">&amp;</span><span class="ident">target_triple</span>) {
-            <span class="comment">// Not cross-compiling if arch-vendor-os is all the same</span>
-            <span class="comment">// e.g. x86_64-unknown-linux-musl on x86_64-unknown-linux-gnu host</span>
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>);
-        }
+    <span class="kw">if</span> <span class="op">!</span><span class="ident">env_vars</span>.<span class="ident">any</span>() <span class="op">&amp;&amp;</span> <span class="ident">is_not_cross_compiling</span>(<span class="ident">host</span>, <span class="kw-2">&amp;</span><span class="ident">target_info</span>) {
+        <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>);
     }
 
-    <span class="comment">// At this point we assume that we are cross compiling.</span>
+    <span class="ident">CrossCompileConfig::from_env_vars</span>(<span class="ident">env_vars</span>, <span class="ident">target_info</span>).<span class="ident">map</span>(<span class="prelude-val">Some</span>)
+}
 
-    <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">CrossCompileConfig</span> {
-        <span class="ident">lib_dir</span>: <span class="ident">cross_lib_dir</span>
-            .<span class="ident">ok_or</span>(<span class="string">&quot;The PYO3_CROSS_LIB_DIR environment variable must be set when cross-compiling&quot;</span>)<span class="question-mark">?</span>
-            .<span class="ident">into</span>(),
-        <span class="ident">arch</span>: <span class="ident">target_arch</span>.<span class="ident">into</span>(),
-        <span class="ident">vendor</span>: <span class="ident">target_vendor</span>.<span class="ident">into</span>(),
-        <span class="ident">os</span>: <span class="ident">target_os</span>.<span class="ident">into</span>(),
-        <span class="ident">version</span>: <span class="ident">cross_python_version</span>
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">os_string</span><span class="op">|</span> {
-                <span class="kw">let</span> <span class="ident">utf8_str</span> <span class="op">=</span> <span class="ident">os_string</span>
-                    .<span class="ident">to_str</span>()
-                    .<span class="ident">ok_or</span>(<span class="string">&quot;PYO3_CROSS_PYTHON_VERSION is not valid utf-8.&quot;</span>)<span class="question-mark">?</span>;
-                <span class="ident">utf8_str</span>
-                    .<span class="ident">parse</span>()
-                    .<span class="ident">context</span>(<span class="string">&quot;failed to parse PYO3_CROSS_PYTHON_VERSION&quot;</span>)
-            })
-            .<span class="ident">transpose</span>()<span class="question-mark">?</span>,
-    }))
+<span class="kw">fn</span> <span class="ident">is_not_cross_compiling</span>(<span class="ident">host</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">target_info</span>: <span class="kw-2">&amp;</span><span class="ident">TargetInfo</span>) -&gt; <span class="ident">bool</span> {
+    <span class="kw">let</span> <span class="ident">target_triple</span> <span class="op">=</span> <span class="ident">target_info</span>.<span class="ident">to_target_triple</span>();
+    <span class="comment">// Not cross-compiling if arch-vendor-os is all the same</span>
+    <span class="comment">// e.g. x86_64-unknown-linux-musl on x86_64-unknown-linux-gnu host</span>
+    <span class="comment">//      x86_64-pc-windows-gnu on x86_64-pc-windows-msvc host</span>
+    <span class="ident">host</span>.<span class="ident">starts_with</span>(<span class="kw-2">&amp;</span><span class="ident">target_triple</span>)
+        <span class="comment">// Not cross-compiling to compile for 32-bit Python from windows 64-bit</span>
+        <span class="op">|</span><span class="op">|</span> (<span class="ident">target_triple</span> <span class="op">==</span> <span class="string">&quot;i686-pc-windows&quot;</span> <span class="op">&amp;&amp;</span> <span class="ident">host</span>.<span class="ident">starts_with</span>(<span class="string">&quot;x86_64-pc-windows&quot;</span>))
+        <span class="comment">// Not cross-compiling to compile for x86-64 Python from macOS arm64</span>
+        <span class="op">|</span><span class="op">|</span> (<span class="ident">target_triple</span> <span class="op">==</span> <span class="string">&quot;x86_64-apple-darwin&quot;</span> <span class="op">&amp;&amp;</span> <span class="ident">host</span> <span class="op">==</span> <span class="string">&quot;aarch64-apple-darwin&quot;</span>)
+        <span class="comment">// Not cross-compiling to compile for arm64 Python from macOS x86_64</span>
+        <span class="op">|</span><span class="op">|</span> (<span class="ident">target_triple</span> <span class="op">==</span> <span class="string">&quot;aarch64-apple-darwin&quot;</span> <span class="op">&amp;&amp;</span> <span class="ident">host</span> <span class="op">==</span> <span class="string">&quot;x86_64-apple-darwin&quot;</span>)
 }
 
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>)]</span>
@@ -2754,15 +2884,15 @@ for key, val in build_time_vars.items():
                     <span class="ident">search_lib_dir</span>(<span class="ident">f</span>.<span class="ident">path</span>(), <span class="ident">cross</span>)
                 } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">file_name</span>.<span class="ident">starts_with</span>(<span class="string">&quot;lib.&quot;</span>) {
                     <span class="comment">// check if right target os</span>
-                    <span class="kw">if</span> <span class="op">!</span><span class="ident">file_name</span>.<span class="ident">contains</span>(<span class="kw">if</span> <span class="ident">cross</span>.<span class="ident">os</span> <span class="op">==</span> <span class="string">&quot;android&quot;</span> {
+                    <span class="kw">if</span> <span class="op">!</span><span class="ident">file_name</span>.<span class="ident">contains</span>(<span class="kw">if</span> <span class="ident">cross</span>.<span class="ident">target_info</span>.<span class="ident">os</span> <span class="op">==</span> <span class="string">&quot;android&quot;</span> {
                         <span class="string">&quot;linux&quot;</span>
                     } <span class="kw">else</span> {
-                        <span class="kw-2">&amp;</span><span class="ident">cross</span>.<span class="ident">os</span>
+                        <span class="kw-2">&amp;</span><span class="ident">cross</span>.<span class="ident">target_info</span>.<span class="ident">os</span>
                     }) {
                         <span class="kw">continue</span>;
                     }
                     <span class="comment">// Check if right arch</span>
-                    <span class="kw">if</span> <span class="op">!</span><span class="ident">file_name</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">cross</span>.<span class="ident">arch</span>) {
+                    <span class="kw">if</span> <span class="op">!</span><span class="ident">file_name</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">cross</span>.<span class="ident">target_info</span>.<span class="ident">arch</span>) {
                         <span class="kw">continue</span>;
                     }
                     <span class="ident">search_lib_dir</span>(<span class="ident">f</span>.<span class="ident">path</span>(), <span class="ident">cross</span>)
@@ -2787,7 +2917,7 @@ for key, val in build_time_vars.items():
     <span class="kw">if</span> <span class="ident">sysconfig_paths</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">1</span> {
         <span class="kw">let</span> <span class="ident">temp</span> <span class="op">=</span> <span class="ident">sysconfig_paths</span>
             .<span class="ident">iter</span>()
-            .<span class="ident">filter</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="ident">p</span>.<span class="ident">to_string_lossy</span>().<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">cross</span>.<span class="ident">arch</span>))
+            .<span class="ident">filter</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="ident">p</span>.<span class="ident">to_string_lossy</span>().<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">cross</span>.<span class="ident">target_info</span>.<span class="ident">arch</span>))
             .<span class="ident">cloned</span>()
             .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span><span class="op">&gt;</span>();
         <span class="kw">if</span> <span class="op">!</span><span class="ident">temp</span>.<span class="ident">is_empty</span>() {
@@ -2803,7 +2933,7 @@ for key, val in build_time_vars.items():
 <span class="doccomment">/// first find sysconfigdata file which follows the pattern [`_sysconfigdata_{abi}_{platform}_{multiarch}`][1]</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// [1]: https://github.com/python/cpython/blob/3.8/Lib/sysconfig.py#L348</span>
-<span class="kw">fn</span> <span class="ident">load_cross_compile_from_sysconfigdata</span>(
+<span class="kw">fn</span> <span class="ident">cross_compile_from_sysconfigdata</span>(
     <span class="ident">cross_compile_config</span>: <span class="ident">CrossCompileConfig</span>,
 ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">InterpreterConfig</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">sysconfigdata_path</span> <span class="op">=</span> <span class="ident">find_sysconfigdata</span>(<span class="kw-2">&amp;</span><span class="ident">cross_compile_config</span>)<span class="question-mark">?</span>;
@@ -2844,11 +2974,11 @@ for key, val in build_time_vars.items():
 ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">InterpreterConfig</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">cargo_env_var</span>(<span class="string">&quot;CARGO_CFG_TARGET_FAMILY&quot;</span>) {
         <span class="comment">// Configure for unix platforms using the sysconfigdata file</span>
-        <span class="prelude-val">Some</span>(<span class="ident">os</span>) <span class="kw">if</span> <span class="ident">os</span> <span class="op">==</span> <span class="string">&quot;unix&quot;</span> =&gt; <span class="ident">load_cross_compile_from_sysconfigdata</span>(<span class="ident">cross_compile_config</span>),
+        <span class="prelude-val">Some</span>(<span class="ident">os</span>) <span class="kw">if</span> <span class="ident">os</span> <span class="op">==</span> <span class="string">&quot;unix&quot;</span> =&gt; <span class="ident">cross_compile_from_sysconfigdata</span>(<span class="ident">cross_compile_config</span>),
         <span class="comment">// Use hardcoded interpreter config when targeting Windows</span>
         <span class="prelude-val">Some</span>(<span class="ident">os</span>) <span class="kw">if</span> <span class="ident">os</span> <span class="op">==</span> <span class="string">&quot;windows&quot;</span> =&gt; <span class="ident">windows_hardcoded_cross_compile</span>(<span class="ident">cross_compile_config</span>),
         <span class="comment">// sysconfigdata works fine on wasm/wasi</span>
-        <span class="prelude-val">Some</span>(<span class="ident">os</span>) <span class="kw">if</span> <span class="ident">os</span> <span class="op">==</span> <span class="string">&quot;wasm&quot;</span> =&gt; <span class="ident">load_cross_compile_from_sysconfigdata</span>(<span class="ident">cross_compile_config</span>),
+        <span class="prelude-val">Some</span>(<span class="ident">os</span>) <span class="kw">if</span> <span class="ident">os</span> <span class="op">==</span> <span class="string">&quot;wasm&quot;</span> =&gt; <span class="ident">cross_compile_from_sysconfigdata</span>(<span class="ident">cross_compile_config</span>),
         <span class="comment">// Waiting for users to tell us what they expect on their target platform</span>
         <span class="prelude-val">Some</span>(<span class="ident">os</span>) =&gt; <span class="macro">bail!</span>(
             <span class="string">&quot;Unknown target OS family for cross-compilation: {:?}.\n\
@@ -2858,7 +2988,7 @@ for key, val in build_time_vars.items():
             <span class="ident">os</span>
         ),
         <span class="comment">// Unknown os family - try to do something useful</span>
-        <span class="prelude-val">None</span> =&gt; <span class="ident">load_cross_compile_from_sysconfigdata</span>(<span class="ident">cross_compile_config</span>),
+        <span class="prelude-val">None</span> =&gt; <span class="ident">cross_compile_from_sysconfigdata</span>(<span class="ident">cross_compile_config</span>),
     }
 }
 
@@ -3034,13 +3164,30 @@ for key, val in build_time_vars.items():
 <span class="doccomment">/// This must be called from PyO3&#39;s build script, because it relies on environment variables such as</span>
 <span class="doccomment">/// CARGO_CFG_TARGET_OS which aren&#39;t available at any other time.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">make_cross_compile_config</span>() -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">InterpreterConfig</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interpreter_config</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">paths</span>) <span class="op">=</span> <span class="ident">cross_compiling_from_cargo_env</span>()<span class="question-mark">?</span> {
-        <span class="ident">load_cross_compile_config</span>(<span class="ident">paths</span>)<span class="question-mark">?</span>
+    <span class="kw">let</span> <span class="ident">env_vars</span> <span class="op">=</span> <span class="ident">cross_compile_env_vars</span>();
+
+    <span class="kw">let</span> <span class="ident">host</span> <span class="op">=</span> <span class="ident">cargo_env_var</span>(<span class="string">&quot;HOST&quot;</span>).<span class="ident">ok_or</span>(<span class="string">&quot;expected HOST env var&quot;</span>)<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="ident">target</span> <span class="op">=</span> <span class="ident">cargo_env_var</span>(<span class="string">&quot;TARGET&quot;</span>).<span class="ident">ok_or</span>(<span class="string">&quot;expected TARGET env var&quot;</span>)<span class="question-mark">?</span>;
+
+    <span class="kw">let</span> <span class="ident">target_info</span> <span class="op">=</span> <span class="ident">TargetInfo::from_cargo_env</span>()<span class="question-mark">?</span>;
+
+    <span class="kw">let</span> <span class="ident">interpreter_config</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">env_vars</span>.<span class="ident">any</span>() {
+        <span class="kw">let</span> <span class="ident">cross_config</span> <span class="op">=</span> <span class="ident">CrossCompileConfig::from_env_vars</span>(<span class="ident">env_vars</span>, <span class="ident">target_info</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interpreter_config</span> <span class="op">=</span> <span class="ident">load_cross_compile_config</span>(<span class="ident">cross_config</span>)<span class="question-mark">?</span>;
+        <span class="ident">fixup_config_for_abi3</span>(<span class="kw-2">&amp;mut</span> <span class="ident">interpreter_config</span>, <span class="ident">get_abi3_version</span>())<span class="question-mark">?</span>;
+        <span class="prelude-val">Some</span>(<span class="ident">interpreter_config</span>)
     } <span class="kw">else</span> {
-        <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>);
+        <span class="macro">ensure!</span>(
+            <span class="ident">host</span> <span class="op">==</span> <span class="ident">target</span> <span class="op">|</span><span class="op">|</span> <span class="ident">is_not_cross_compiling</span>(<span class="kw-2">&amp;</span><span class="ident">host</span>, <span class="kw-2">&amp;</span><span class="ident">target_info</span>),
+            <span class="string">&quot;PyO3 detected compile host {host} and build target {target}, but none of PYO3_CROSS, PYO3_CROSS_LIB_DIR \
+             or PYO3_CROSS_PYTHON_VERSION environment variables are set.&quot;</span>,
+            <span class="ident">host</span><span class="op">=</span><span class="ident">host</span>,
+            <span class="ident">target</span><span class="op">=</span><span class="ident">target</span>,
+        );
+        <span class="prelude-val">None</span>
     };
-    <span class="ident">fixup_config_for_abi3</span>(<span class="kw-2">&amp;mut</span> <span class="ident">interpreter_config</span>, <span class="ident">get_abi3_version</span>())<span class="question-mark">?</span>;
-    <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">interpreter_config</span>))
+
+    <span class="prelude-val">Ok</span>(<span class="ident">interpreter_config</span>)
 }
 
 <span class="doccomment">/// Generates an interpreter config which will be hard-coded into the pyo3-build-config crate.</span>
@@ -3245,13 +3392,70 @@ for key, val in build_time_vars.items():
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
+    <span class="kw">fn</span> <span class="ident">config_from_sysconfigdata_framework</span>() {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">sysconfigdata</span> <span class="op">=</span> <span class="ident">Sysconfigdata::new</span>();
+        <span class="ident">sysconfigdata</span>.<span class="ident">insert</span>(<span class="string">&quot;SOABI&quot;</span>, <span class="string">&quot;cpython-37m-x86_64-linux-gnu&quot;</span>);
+        <span class="ident">sysconfigdata</span>.<span class="ident">insert</span>(<span class="string">&quot;VERSION&quot;</span>, <span class="string">&quot;3.7&quot;</span>);
+        <span class="comment">// PYTHONFRAMEWORK should override Py_ENABLE_SHARED</span>
+        <span class="ident">sysconfigdata</span>.<span class="ident">insert</span>(<span class="string">&quot;Py_ENABLE_SHARED&quot;</span>, <span class="string">&quot;0&quot;</span>);
+        <span class="ident">sysconfigdata</span>.<span class="ident">insert</span>(<span class="string">&quot;PYTHONFRAMEWORK&quot;</span>, <span class="string">&quot;Python&quot;</span>);
+        <span class="ident">sysconfigdata</span>.<span class="ident">insert</span>(<span class="string">&quot;LIBDIR&quot;</span>, <span class="string">&quot;/usr/lib&quot;</span>);
+        <span class="ident">sysconfigdata</span>.<span class="ident">insert</span>(<span class="string">&quot;LDVERSION&quot;</span>, <span class="string">&quot;3.7m&quot;</span>);
+        <span class="ident">sysconfigdata</span>.<span class="ident">insert</span>(<span class="string">&quot;SIZEOF_VOID_P&quot;</span>, <span class="string">&quot;8&quot;</span>);
+        <span class="macro">assert_eq!</span>(
+            <span class="ident">InterpreterConfig::from_sysconfigdata</span>(<span class="kw-2">&amp;</span><span class="ident">sysconfigdata</span>).<span class="ident">unwrap</span>(),
+            <span class="ident">InterpreterConfig</span> {
+                <span class="ident">abi3</span>: <span class="bool-val">false</span>,
+                <span class="ident">build_flags</span>: <span class="ident">BuildFlags::from_sysconfigdata</span>(<span class="kw-2">&amp;</span><span class="ident">sysconfigdata</span>),
+                <span class="ident">pointer_width</span>: <span class="prelude-val">Some</span>(<span class="number">64</span>),
+                <span class="ident">executable</span>: <span class="prelude-val">None</span>,
+                <span class="ident">implementation</span>: <span class="ident">PythonImplementation::CPython</span>,
+                <span class="ident">lib_dir</span>: <span class="prelude-val">Some</span>(<span class="string">&quot;/usr/lib&quot;</span>.<span class="ident">into</span>()),
+                <span class="ident">lib_name</span>: <span class="prelude-val">Some</span>(<span class="string">&quot;python3.7m&quot;</span>.<span class="ident">into</span>()),
+                <span class="ident">shared</span>: <span class="bool-val">true</span>,
+                <span class="ident">version</span>: <span class="ident">PythonVersion::PY37</span>,
+                <span class="ident">suppress_build_script_link_lines</span>: <span class="bool-val">false</span>,
+                <span class="ident">extra_build_script_lines</span>: <span class="macro">vec!</span>[],
+            }
+        );
+
+        <span class="ident">sysconfigdata</span> <span class="op">=</span> <span class="ident">Sysconfigdata::new</span>();
+        <span class="ident">sysconfigdata</span>.<span class="ident">insert</span>(<span class="string">&quot;SOABI&quot;</span>, <span class="string">&quot;cpython-37m-x86_64-linux-gnu&quot;</span>);
+        <span class="ident">sysconfigdata</span>.<span class="ident">insert</span>(<span class="string">&quot;VERSION&quot;</span>, <span class="string">&quot;3.7&quot;</span>);
+        <span class="comment">// An empty PYTHONFRAMEWORK means it is not a framework</span>
+        <span class="ident">sysconfigdata</span>.<span class="ident">insert</span>(<span class="string">&quot;Py_ENABLE_SHARED&quot;</span>, <span class="string">&quot;0&quot;</span>);
+        <span class="ident">sysconfigdata</span>.<span class="ident">insert</span>(<span class="string">&quot;PYTHONFRAMEWORK&quot;</span>, <span class="string">&quot;&quot;</span>);
+        <span class="ident">sysconfigdata</span>.<span class="ident">insert</span>(<span class="string">&quot;LIBDIR&quot;</span>, <span class="string">&quot;/usr/lib&quot;</span>);
+        <span class="ident">sysconfigdata</span>.<span class="ident">insert</span>(<span class="string">&quot;LDVERSION&quot;</span>, <span class="string">&quot;3.7m&quot;</span>);
+        <span class="ident">sysconfigdata</span>.<span class="ident">insert</span>(<span class="string">&quot;SIZEOF_VOID_P&quot;</span>, <span class="string">&quot;8&quot;</span>);
+        <span class="macro">assert_eq!</span>(
+            <span class="ident">InterpreterConfig::from_sysconfigdata</span>(<span class="kw-2">&amp;</span><span class="ident">sysconfigdata</span>).<span class="ident">unwrap</span>(),
+            <span class="ident">InterpreterConfig</span> {
+                <span class="ident">abi3</span>: <span class="bool-val">false</span>,
+                <span class="ident">build_flags</span>: <span class="ident">BuildFlags::from_sysconfigdata</span>(<span class="kw-2">&amp;</span><span class="ident">sysconfigdata</span>),
+                <span class="ident">pointer_width</span>: <span class="prelude-val">Some</span>(<span class="number">64</span>),
+                <span class="ident">executable</span>: <span class="prelude-val">None</span>,
+                <span class="ident">implementation</span>: <span class="ident">PythonImplementation::CPython</span>,
+                <span class="ident">lib_dir</span>: <span class="prelude-val">Some</span>(<span class="string">&quot;/usr/lib&quot;</span>.<span class="ident">into</span>()),
+                <span class="ident">lib_name</span>: <span class="prelude-val">Some</span>(<span class="string">&quot;python3.7m&quot;</span>.<span class="ident">into</span>()),
+                <span class="ident">shared</span>: <span class="bool-val">false</span>,
+                <span class="ident">version</span>: <span class="ident">PythonVersion::PY37</span>,
+                <span class="ident">suppress_build_script_link_lines</span>: <span class="bool-val">false</span>,
+                <span class="ident">extra_build_script_lines</span>: <span class="macro">vec!</span>[],
+            }
+        );
+    }
+
+    <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">windows_hardcoded_cross_compile</span>() {
         <span class="kw">let</span> <span class="ident">cross_config</span> <span class="op">=</span> <span class="ident">CrossCompileConfig</span> {
             <span class="ident">lib_dir</span>: <span class="string">&quot;C:\\some\\path&quot;</span>.<span class="ident">into</span>(),
             <span class="ident">version</span>: <span class="prelude-val">Some</span>(<span class="ident">PythonVersion</span> { <span class="ident">major</span>: <span class="number">3</span>, <span class="ident">minor</span>: <span class="number">7</span> }),
-            <span class="ident">os</span>: <span class="string">&quot;os&quot;</span>.<span class="ident">into</span>(),
-            <span class="ident">arch</span>: <span class="string">&quot;arch&quot;</span>.<span class="ident">into</span>(),
-            <span class="ident">vendor</span>: <span class="string">&quot;vendor&quot;</span>.<span class="ident">into</span>(),
+            <span class="ident">target_info</span>: <span class="ident">TargetInfo</span> {
+                <span class="ident">os</span>: <span class="string">&quot;os&quot;</span>.<span class="ident">into</span>(),
+                <span class="ident">arch</span>: <span class="string">&quot;arch&quot;</span>.<span class="ident">into</span>(),
+                <span class="ident">vendor</span>: <span class="string">&quot;vendor&quot;</span>.<span class="ident">into</span>(),
+            },
         };
 
         <span class="macro">assert_eq!</span>(
@@ -3423,9 +3627,11 @@ for key, val in build_time_vars.items():
         <span class="kw">let</span> <span class="ident">cross</span> <span class="op">=</span> <span class="ident">CrossCompileConfig</span> {
             <span class="ident">lib_dir</span>: <span class="ident">lib_dir</span>.<span class="ident">into</span>(),
             <span class="ident">version</span>: <span class="prelude-val">Some</span>(<span class="ident">interpreter_config</span>.<span class="ident">version</span>),
-            <span class="ident">arch</span>: <span class="string">&quot;x86_64&quot;</span>.<span class="ident">into</span>(),
-            <span class="ident">vendor</span>: <span class="string">&quot;unknown&quot;</span>.<span class="ident">into</span>(),
-            <span class="ident">os</span>: <span class="string">&quot;linux&quot;</span>.<span class="ident">into</span>(),
+            <span class="ident">target_info</span>: <span class="ident">TargetInfo</span> {
+                <span class="ident">arch</span>: <span class="string">&quot;x86_64&quot;</span>.<span class="ident">into</span>(),
+                <span class="ident">vendor</span>: <span class="string">&quot;unknown&quot;</span>.<span class="ident">into</span>(),
+                <span class="ident">os</span>: <span class="string">&quot;linux&quot;</span>.<span class="ident">into</span>(),
+            },
         };
 
         <span class="kw">let</span> <span class="ident">sysconfigdata_path</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">find_sysconfigdata</span>(<span class="kw-2">&amp;</span><span class="ident">cross</span>) {
