@@ -734,12 +734,6 @@
 <span id="729">729</span>
 <span id="730">730</span>
 <span id="731">731</span>
-<span id="732">732</span>
-<span id="733">733</span>
-<span id="734">734</span>
-<span id="735">735</span>
-<span id="736">736</span>
-<span id="737">737</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright (c) 2017-present PyO3 Project and Contributors</span>
 
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::attributes::TextSignatureAttribute</span>;
@@ -925,7 +919,7 @@
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">CallingConvention</span> {
     <span class="ident">Noargs</span>,   <span class="comment">// METH_NOARGS</span>
     <span class="ident">Varargs</span>,  <span class="comment">// METH_VARARGS | METH_KEYWORDS</span>
-    <span class="ident">Fastcall</span>, <span class="comment">// METH_FASTCALL | METH_KEYWORDS  (Py3.7+ and !abi3)</span>
+    <span class="ident">Fastcall</span>, <span class="comment">// METH_FASTCALL | METH_KEYWORDS (not compatible with `abi3` feature)</span>
     <span class="ident">TpNew</span>,    <span class="comment">// special convention for tp_new</span>
 }
 
@@ -941,19 +935,13 @@
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">accept_kwargs</span> {
             <span class="comment">// for functions that accept **kwargs, always prefer varargs</span>
             <span class="ident"><span class="self">Self</span>::Varargs</span>
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">can_use_fastcall</span>() {
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="macro">cfg!</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;abi3&quot;</span>)) {
+            <span class="comment">// Not available in the Stable ABI as of Python 3.10</span>
             <span class="ident"><span class="self">Self</span>::Fastcall</span>
         } <span class="kw">else</span> {
             <span class="ident"><span class="self">Self</span>::Varargs</span>
         }
     }
-}
-
-<span class="kw">fn</span> <span class="ident">can_use_fastcall</span>() -&gt; <span class="ident">bool</span> {
-    <span class="kw">const</span> <span class="ident">PY37</span>: <span class="ident">pyo3_build_config::PythonVersion</span> <span class="op">=</span>
-        <span class="ident">pyo3_build_config::PythonVersion</span> { <span class="ident">major</span>: <span class="number">3</span>, <span class="ident">minor</span>: <span class="number">7</span> };
-    <span class="kw">let</span> <span class="ident">config</span> <span class="op">=</span> <span class="ident">pyo3_build_config::get</span>();
-    <span class="ident">config</span>.<span class="ident">version</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">PY37</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">config</span>.<span class="ident">abi3</span>
 }
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FnSpec</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
