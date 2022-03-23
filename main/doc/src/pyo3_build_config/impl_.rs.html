@@ -1854,6 +1854,7 @@
 <span id="1849">1849</span>
 <span id="1850">1850</span>
 <span id="1851">1851</span>
+<span id="1852">1852</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">collections</span>::{<span class="ident">HashMap</span>, <span class="ident">HashSet</span>},
     <span class="ident">convert::AsRef</span>,
@@ -1875,8 +1876,9 @@
 
 <span class="doccomment">/// Minimum Python version PyO3 supports.</span>
 <span class="kw">const</span> <span class="ident">MINIMUM_SUPPORTED_VERSION</span>: <span class="ident">PythonVersion</span> <span class="op">=</span> <span class="ident">PythonVersion</span> { <span class="ident">major</span>: <span class="number">3</span>, <span class="ident">minor</span>: <span class="number">7</span> };
+
 <span class="doccomment">/// Maximum Python version that can be used as minimum required Python version with abi3.</span>
-<span class="kw">const</span> <span class="ident">ABI3_MAX_MINOR</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">9</span>;
+<span class="kw">const</span> <span class="ident">ABI3_MAX_MINOR</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">10</span>;
 
 <span class="doccomment">/// Gets an environment variable owned by cargo.</span>
 <span class="doccomment">///</span>
