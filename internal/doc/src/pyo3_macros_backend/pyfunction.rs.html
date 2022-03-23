@@ -619,7 +619,7 @@
     <span class="ident">has_kwargs</span>: <span class="ident">bool</span>,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Debug</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PyFunctionArgPyO3Attributes</span> {
     <span class="kw">pub</span> <span class="ident">from_py_with</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">FromPyWithAttribute</span><span class="op">&gt;</span>,
 }
@@ -650,7 +650,7 @@
                         <span class="ident">PyFunctionArgPyO3Attribute::FromPyWith</span>(<span class="ident">from_py_with</span>) =&gt; {
                             <span class="macro">ensure_spanned!</span>(
                                 <span class="ident">attributes</span>.<span class="ident">from_py_with</span>.<span class="ident">is_none</span>(),
-                                <span class="ident">from_py_with</span>.<span class="number">0</span>.<span class="ident">span</span>() =&gt; <span class="string">&quot;`from_py_with` may only be specified once per argument&quot;</span>
+                                <span class="ident">from_py_with</span>.<span class="ident">span</span>() =&gt; <span class="string">&quot;`from_py_with` may only be specified once per argument&quot;</span>
                             );
                             <span class="ident">attributes</span>.<span class="ident">from_py_with</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">from_py_with</span>);
                         }
@@ -918,7 +918,7 @@
                 <span class="ident">PyFunctionOption::Crate</span>(<span class="ident">path</span>) =&gt; {
                     <span class="macro">ensure_spanned!</span>(
                         <span class="self">self</span>.<span class="ident">krate</span>.<span class="ident">is_none</span>(),
-                        <span class="ident">path</span>.<span class="number">0</span>.<span class="ident">span</span>() =&gt; <span class="string">&quot;`crate` may only be specified once&quot;</span>
+                        <span class="ident">path</span>.<span class="ident">span</span>() =&gt; <span class="string">&quot;`crate` may only be specified once&quot;</span>
                     );
                     <span class="self">self</span>.<span class="ident">krate</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">path</span>);
                 }
@@ -930,7 +930,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_name</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">name</span>: <span class="ident">NameAttribute</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="macro">ensure_spanned!</span>(
             <span class="self">self</span>.<span class="ident">name</span>.<span class="ident">is_none</span>(),
-            <span class="ident">name</span>.<span class="number">0</span>.<span class="ident">span</span>() =&gt; <span class="string">&quot;`name` may only be specified once&quot;</span>
+            <span class="ident">name</span>.<span class="ident">span</span>() =&gt; <span class="string">&quot;`name` may only be specified once&quot;</span>
         );
         <span class="self">self</span>.<span class="ident">name</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">name</span>);
         <span class="prelude-val">Ok</span>(())
@@ -956,7 +956,7 @@
 
     <span class="kw">let</span> <span class="ident">python_name</span> <span class="op">=</span> <span class="ident">options</span>
         .<span class="ident">name</span>
-        .<span class="ident">map_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">func</span>.<span class="ident">sig</span>.<span class="ident">ident</span>.<span class="ident">unraw</span>(), <span class="op">|</span><span class="ident">name</span><span class="op">|</span> <span class="ident">name</span>.<span class="number">0</span>);
+        .<span class="ident">map_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">func</span>.<span class="ident">sig</span>.<span class="ident">ident</span>.<span class="ident">unraw</span>(), <span class="op">|</span><span class="ident">name</span><span class="op">|</span> <span class="ident">name</span>.<span class="ident">value</span>.<span class="number">0</span>);
 
     <span class="kw">let</span> <span class="ident">signature</span> <span class="op">=</span> <span class="ident">options</span>.<span class="ident">signature</span>.<span class="ident">unwrap_or_default</span>();
 
@@ -1152,5 +1152,5 @@
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="pyo3_macros_backend" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (3c17c84a3 2022-03-21)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="pyo3_macros_backend" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (5f3700105 2022-03-22)" ></div>
 </body></html>

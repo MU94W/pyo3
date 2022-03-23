@@ -275,18 +275,6 @@
 <span id="270">270</span>
 <span id="271">271</span>
 <span id="272">272</span>
-<span id="273">273</span>
-<span id="274">274</span>
-<span id="275">275</span>
-<span id="276">276</span>
-<span id="277">277</span>
-<span id="278">278</span>
-<span id="279">279</span>
-<span id="280">280</span>
-<span id="281">281</span>
-<span id="282">282</span>
-<span id="283">283</span>
-<span id="284">284</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright (c) 2017-present PyO3 Project and Contributors</span>
 <span class="doccomment">//! This crate declares only the proc macro attributes, as a crate defining proc macro attributes</span>
 <span class="doccomment">//! must not contain any other public items.</span>
@@ -370,30 +358,18 @@
 
 <span class="doccomment">/// A proc macro used to expose Rust structs and fieldless enums as Python objects.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// `#[pyclass]` accepts the following [parameters][2]:</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// |  Parameter  |  Description |</span>
-<span class="doccomment">/// | :-  | :- |</span>
-<span class="doccomment">/// | &lt;span style=&quot;white-space: pre&quot;&gt;`name = &quot;python_name&quot;`&lt;/span&gt; | Sets the name that Python sees this class as. Defaults to the name of the Rust struct. |</span>
-<span class="doccomment">/// | &lt;span style=&quot;white-space: pre&quot;&gt;`freelist = N`&lt;/span&gt; |  Implements a [free list][9] of size N. This can improve performance for types that are often created and deleted in quick succession. Profile your code to see whether `freelist` is right for you.  |</span>
-<span class="doccomment">/// | `weakref` | Allows this class to be [weakly referenceable][6]. |</span>
-<span class="doccomment">/// | &lt;span style=&quot;white-space: pre&quot;&gt;`extends = BaseType`&lt;/span&gt;  | Use a custom baseclass. Defaults to [`PyAny`][4] |</span>
-<span class="doccomment">/// | `subclass` | Allows other Python classes and `#[pyclass]` to inherit from this class. Enums cannot be subclassed. |</span>
-<span class="doccomment">/// | `unsendable` | Required if your struct is not [`Send`][3]. Rather than using `unsendable`, consider implementing your struct in a threadsafe way by e.g. substituting [`Rc`][7] with [`Arc`][8]. By using `unsendable`, your class will panic when accessed by another thread.|</span>
-<span class="doccomment">/// | &lt;span style=&quot;white-space: pre&quot;&gt;`module = &quot;module_name&quot;`&lt;/span&gt; |  Python code will see the class as being defined in this module. Defaults to `builtins`. |</span>
+<span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">docsrs</span>, <span class="ident">cfg_attr</span>(<span class="ident">docsrs</span>, <span class="ident">doc</span> <span class="op">=</span> <span class="macro">include_str!</span>(<span class="string">&quot;../docs/pyclass_parameters.md&quot;</span>)))]</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// For more on creating Python classes,</span>
 <span class="doccomment">/// see the [class section of the guide][1].</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// [1]: https://pyo3.rs/latest/class.html</span>
-<span class="doccomment">/// [2]: https://pyo3.rs/latest/class.html#customizing-the-class</span>
-<span class="doccomment">/// [3]: std::marker::Send</span>
-<span class="doccomment">/// [4]: ../prelude/struct.PyAny.html</span>
-<span class="doccomment">/// [5]: https://pyo3.rs/latest/class/protocols.html#garbage-collector-integration</span>
-<span class="doccomment">/// [6]: https://docs.python.org/3/library/weakref.html</span>
-<span class="doccomment">/// [7]: std::rc::Rc</span>
-<span class="doccomment">/// [8]: std::sync::Arc</span>
-<span class="doccomment">/// [9]: https://en.wikipedia.org/wiki/Free_list</span>
+<span class="doccomment">/// [params-1]: ../prelude/struct.PyAny.html</span>
+<span class="doccomment">/// [params-2]: https://en.wikipedia.org/wiki/Free_list</span>
+<span class="doccomment">/// [params-3]: std::marker::Send</span>
+<span class="doccomment">/// [params-4]: std::rc::Rc</span>
+<span class="doccomment">/// [params-5]: std::sync::Arc</span>
+<span class="doccomment">/// [params-6]: https://docs.python.org/3/library/weakref.html</span>
 <span class="attribute">#[<span class="ident">proc_macro_attribute</span>]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pyclass</span>(<span class="ident">attr</span>: <span class="ident">TokenStream</span>, <span class="ident">input</span>: <span class="ident">TokenStream</span>) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">use</span> <span class="ident">syn::Item</span>;
@@ -519,7 +495,7 @@
     <span class="ident">methods_type</span>: <span class="ident">PyClassMethodsType</span>,
 ) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="macro">parse_macro_input!</span>(<span class="ident">attrs</span> <span class="ident">with</span> <span class="ident">PyClassArgs::parse_stuct_args</span>);
-    <span class="kw">let</span> <span class="ident">expanded</span> <span class="op">=</span> <span class="ident">build_py_class</span>(<span class="kw-2">&amp;mut</span> <span class="ident">ast</span>, <span class="kw-2">&amp;</span><span class="ident">args</span>, <span class="ident">methods_type</span>).<span class="ident">unwrap_or_compile_error</span>();
+    <span class="kw">let</span> <span class="ident">expanded</span> <span class="op">=</span> <span class="ident">build_py_class</span>(<span class="kw-2">&amp;mut</span> <span class="ident">ast</span>, <span class="ident">args</span>, <span class="ident">methods_type</span>).<span class="ident">unwrap_or_compile_error</span>();
 
     <span class="macro">quote!</span>(
         #<span class="ident">ast</span>
@@ -534,7 +510,7 @@
     <span class="ident">methods_type</span>: <span class="ident">PyClassMethodsType</span>,
 ) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="macro">parse_macro_input!</span>(<span class="ident">attrs</span> <span class="ident">with</span> <span class="ident">PyClassArgs::parse_enum_args</span>);
-    <span class="kw">let</span> <span class="ident">expanded</span> <span class="op">=</span> <span class="ident">build_py_enum</span>(<span class="kw-2">&amp;mut</span> <span class="ident">ast</span>, <span class="kw-2">&amp;</span><span class="ident">args</span>, <span class="ident">methods_type</span>).<span class="ident">unwrap_or_compile_error</span>();
+    <span class="kw">let</span> <span class="ident">expanded</span> <span class="op">=</span> <span class="ident">build_py_enum</span>(<span class="kw-2">&amp;mut</span> <span class="ident">ast</span>, <span class="ident">args</span>, <span class="ident">methods_type</span>).<span class="ident">unwrap_or_compile_error</span>();
 
     <span class="macro">quote!</span>(
         #<span class="ident">ast</span>
@@ -572,5 +548,5 @@
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="pyo3_macros" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (3c17c84a3 2022-03-21)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="pyo3_macros" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (5f3700105 2022-03-22)" ></div>
 </body></html>

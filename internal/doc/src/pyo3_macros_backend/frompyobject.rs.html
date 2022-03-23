@@ -578,6 +578,10 @@
 <span id="573">573</span>
 <span id="574">574</span>
 <span id="575">575</span>
+<span id="576">576</span>
+<span id="577">577</span>
+<span id="578">578</span>
+<span id="579">579</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::{
     <span class="ident">attributes</span>::{<span class="self">self</span>, <span class="ident">get_pyo3_options</span>, <span class="ident">CrateAttribute</span>, <span class="ident">FromPyWithAttribute</span>},
     <span class="ident">utils::get_pyo3_crate</span>,
@@ -832,7 +836,9 @@
                 <span class="prelude-val">None</span> =&gt; <span class="macro">quote!</span>(
                     <span class="ident">obj</span>.<span class="ident">get_item</span>(#<span class="ident">index</span>)<span class="question-mark">?</span>.<span class="ident">extract</span>()
                 ),
-                <span class="prelude-val">Some</span>(<span class="ident">FromPyWithAttribute</span>(<span class="ident">expr_path</span>)) =&gt; <span class="macro">quote!</span> (
+                <span class="prelude-val">Some</span>(<span class="ident">FromPyWithAttribute</span> {
+                    <span class="ident">value</span>: <span class="ident">expr_path</span>, ..
+                }) =&gt; <span class="macro">quote!</span> (
                     #<span class="ident">expr_path</span>(<span class="ident">obj</span>.<span class="ident">get_item</span>(#<span class="ident">index</span>)<span class="question-mark">?</span>)
                 ),
             };
@@ -888,7 +894,9 @@
                     <span class="ident">new_err</span>.<span class="ident">set_cause</span>(<span class="ident">py</span>, <span class="ident">::std::option::Option::Some</span>(<span class="ident">inner</span>));
                     <span class="ident">new_err</span>
                 })<span class="question-mark">?</span>),
-                <span class="prelude-val">Some</span>(<span class="ident">FromPyWithAttribute</span>(<span class="ident">expr_path</span>)) =&gt; <span class="macro">quote!</span> (
+                <span class="prelude-val">Some</span>(<span class="ident">FromPyWithAttribute</span> {
+                    <span class="ident">value</span>: <span class="ident">expr_path</span>, ..
+                }) =&gt; <span class="macro">quote!</span> (
                     #<span class="ident">expr_path</span>(#<span class="ident">get_field</span>).<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">inner</span><span class="op">|</span> {
                         <span class="kw">let</span> <span class="ident">py</span> <span class="op">=</span> <span class="ident">_pyo3::PyNativeType::py</span>(<span class="ident">obj</span>);
                         <span class="kw">let</span> <span class="ident">new_err</span> <span class="op">=</span> <span class="ident">_pyo3::exceptions::PyTypeError::new_err</span>(#<span class="ident">conversion_error_msg</span>);
@@ -968,7 +976,7 @@
                         <span class="ident">ContainerPyO3Attribute::Crate</span>(<span class="ident">path</span>) =&gt; {
                             <span class="macro">ensure_spanned!</span>(
                                 <span class="ident">options</span>.<span class="ident">krate</span>.<span class="ident">is_none</span>(),
-                                <span class="ident">path</span>.<span class="number">0</span>.<span class="ident">span</span>() =&gt; <span class="string">&quot;`crate` may only be provided once&quot;</span>
+                                <span class="ident">path</span>.<span class="ident">span</span>() =&gt; <span class="string">&quot;`crate` may only be provided once&quot;</span>
                             );
                             <span class="ident">options</span>.<span class="ident">krate</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">path</span>);
                         }
@@ -1154,5 +1162,5 @@
     ))
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="pyo3_macros_backend" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (3c17c84a3 2022-03-21)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="pyo3_macros_backend" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (5f3700105 2022-03-22)" ></div>
 </body></html>

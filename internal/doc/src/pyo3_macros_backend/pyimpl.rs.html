@@ -361,7 +361,7 @@
     <span class="kw">fn</span> <span class="ident">set_crate</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="ident">CrateAttribute</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="macro">ensure_spanned!</span>(
             <span class="self">self</span>.<span class="ident">krate</span>.<span class="ident">is_none</span>(),
-            <span class="ident">path</span>.<span class="number">0</span>.<span class="ident">span</span>() =&gt; <span class="string">&quot;`crate` may only be specified once&quot;</span>
+            <span class="ident">path</span>.<span class="ident">span</span>() =&gt; <span class="string">&quot;`crate` may only be specified once&quot;</span>
         );
 
         <span class="self">self</span>.<span class="ident">krate</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">path</span>);
@@ -594,5 +594,5 @@
         .<span class="ident">collect</span>()
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="pyo3_macros_backend" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (3c17c84a3 2022-03-21)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="pyo3_macros_backend" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (5f3700105 2022-03-22)" ></div>
 </body></html>
