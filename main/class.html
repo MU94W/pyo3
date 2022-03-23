@@ -337,23 +337,31 @@ Python::with_gil(|py|{
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="customizing-the-class"><a class="header" href="#customizing-the-class">Customizing the class</a></h2>
-<p>The <code>#[pyclass]</code> macro accepts the following parameters:</p>
-<ul>
-<li><code>name=&quot;XXX&quot;</code> - Set the class name shown in Python code. By default, the struct name is used as the class name.</li>
-<li><code>freelist=XXX</code> - The <code>freelist</code> parameter adds support of free allocation list to custom class.
-The performance improvement applies to types that are often created and deleted in a row,
-so that they can benefit from a freelist. <code>XXX</code> is a number of items for the free list.</li>
-<li><code>gc</code> - Classes with the <code>gc</code> parameter participate in Python garbage collection.
-If a custom class contains references to other Python objects that can be collected, the <a href="https://pyo3.rs/main/doc/pyo3/class/gc/trait.PyGCProtocol.html"><code>PyGCProtocol</code></a> trait has to be implemented.</li>
-<li><code>weakref</code> - Adds support for Python weak references.</li>
-<li><code>extends=BaseType</code> - Use a custom base class. The base <code>BaseType</code> must implement <code>PyTypeInfo</code>. <code>enum</code> pyclasses can't use a custom base class.</li>
-<li><code>subclass</code> - Allows Python classes to inherit from this class. <code>enum</code> pyclasses can't be inherited from.</li>
-<li><code>dict</code> - Adds <code>__dict__</code> support, so that the instances of this type have a dictionary containing arbitrary instance variables.</li>
-<li><code>unsendable</code> - Making it safe to expose <code>!Send</code> structs to Python, where all object can be accessed
-by multiple threads. A class marked with <code>unsendable</code> panics when accessed by another thread.</li>
-<li><code>module=&quot;XXX&quot;</code> - Set the name of the module the class will be shown as defined in. If not given, the class
-will be a virtual member of the <code>builtins</code> module.</li>
-</ul>
+<p><code>#[pyclass]</code> can be used with the following parameters:</p>
+<table><thead><tr><th align="left">Parameter</th><th align="left">Description</th></tr></thead><tbody>
+<tr><td align="left"><span style="white-space: pre"><code>crate = &quot;some::path&quot;</code></span></td><td align="left">Path to import the <code>pyo3</code> crate, if it's not accessible at <code>::pyo3</code>.</td></tr>
+<tr><td align="left"><code>dict</code></td><td align="left">Gives instances of this class an empty <code>__dict__</code> to store custom attributes.</td></tr>
+<tr><td align="left"><span style="white-space: pre"><code>extends = BaseType</code></span></td><td align="left">Use a custom baseclass. Defaults to <a href="https://pyo3.rs/main/doc/pyo3/prelude/struct.PyAny.html"><code>PyAny</code></a></td></tr>
+<tr><td align="left"><span style="white-space: pre"><code>freelist = N</code></span></td><td align="left">Implements a <a href="https://en.wikipedia.org/wiki/Free_list">free list</a> of size N. This can improve performance for types that are often created and deleted in quick succession. Profile your code to see whether <code>freelist</code> is right for you.</td></tr>
+<tr><td align="left"><span style="white-space: pre"><code>module = &quot;module_name&quot;</code></span></td><td align="left">Python code will see the class as being defined in this module. Defaults to <code>builtins</code>.</td></tr>
+<tr><td align="left"><span style="white-space: pre"><code>name = &quot;python_name&quot;</code></span></td><td align="left">Sets the name that Python sees this class as. Defaults to the name of the Rust struct.</td></tr>
+<tr><td align="left"><span style="white-space: pre"><code>text_signature = &quot;(arg1, arg2, ...)&quot;</code></span></td><td align="left">Sets the text signature for the Python class' <code>__new__</code> method.</td></tr>
+<tr><td align="left"><code>subclass</code></td><td align="left">Allows other Python classes and <code>#[pyclass]</code> to inherit from this class. Enums cannot be subclassed.</td></tr>
+<tr><td align="left"><code>unsendable</code></td><td align="left">Required if your struct is not <a href="https://doc.rust-lang.org/stable/std/marker/trait.Send.html"><code>Send</code></a>. Rather than using <code>unsendable</code>, consider implementing your struct in a threadsafe way by e.g. substituting <a href="https://doc.rust-lang.org/stable/std/rc/struct.Rc.html"><code>Rc</code></a> with <a href="https://doc.rust-lang.org/stable/std/sync/struct.Rc.html"><code>Arc</code></a>. By using <code>unsendable</code>, your class will panic when accessed by another thread.</td></tr>
+<tr><td align="left"><code>weakref</code></td><td align="left">Allows this class to be <a href="https://docs.python.org/3/library/weakref.html">weakly referenceable</a>.</td></tr>
+</tbody></table>
+<p>All of these parameters can either be passed directly on the <code>#[pyclass(...)]</code> annotation, or as one or
+more accompanying <code>#[pyo3(...)]</code> annotations, e.g.:</p>
+<pre><code class="language-rust ignore">// Argument supplied directly to the `#[pyclass]` annotation.
+#[pyclass(name = &quot;SomeName&quot;, subclass)]
+struct MyClass { }
+
+// Argument supplied as a separate annotation.
+#[pyclass]
+#[pyo3(name = &quot;SomeName&quot;, subclass)]
+struct MyClass { }
+</code></pre>
+<p>These parameters are covered in various sections of this guide.</p>
 <h3 id="return-type"><a class="header" href="#return-type">Return type</a></h3>
 <p>Generally, <code>#[new]</code> method have to return <code>T: Into&lt;PyClassInitializer&lt;Self&gt;&gt;</code> or
 <code>PyResult&lt;T&gt; where T: Into&lt;PyClassInitializer&lt;Self&gt;&gt;</code>.</p>
@@ -843,14 +851,13 @@ num=44
 num=-1
 </code></pre>
 <h2 id="making-class-method-signatures-available-to-python"><a class="header" href="#making-class-method-signatures-available-to-python">Making class method signatures available to Python</a></h2>
-<p>The <a href="./function.html#text_signature"><code>#[pyo3(text_signature = &quot;...&quot;)]</code></a> option for <code>#[pyfunction]</code> also works for classes and methods:</p>
+<p>The <a href="./function.html#text_signature"><code>text_signature = &quot;...&quot;</code></a> option for <code>#[pyfunction]</code> also works for classes and methods:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(dead_code)]
 </span>use pyo3::prelude::*;
 use pyo3::types::PyType;
 
 // it works even if the item is not documented:
-#[pyclass]
-#[pyo3(text_signature = &quot;(c, d, /)&quot;)]
+#[pyclass(text_signature = &quot;(c, d, /)&quot;)]
 struct MyClass {}
 
 #[pymethods]
