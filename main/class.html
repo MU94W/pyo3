@@ -258,7 +258,7 @@ created from Rust, but not from Python.</p>
 </span><span class="boring">struct Number(i32);
 </span><span class="boring">
 </span>#[pymodule]
-fn my_module(_py: Python, m: &amp;PyModule) -&gt; PyResult&lt;()&gt; {
+fn my_module(_py: Python&lt;'_&gt;, m: &amp;PyModule) -&gt; PyResult&lt;()&gt; {
     m.add_class::&lt;Number&gt;()?;
     Ok(())
 }
@@ -417,7 +417,7 @@ impl SubClass {
         (SubClass { val2: 15 }, BaseClass::new())
     }
 
-    fn method2(self_: PyRef&lt;Self&gt;) -&gt; PyResult&lt;usize&gt; {
+    fn method2(self_: PyRef&lt;'_, Self&gt;) -&gt; PyResult&lt;usize&gt; {
         let super_ = self_.as_ref();  // Get &amp;BaseClass
         super_.method().map(|x| x * self_.val2)
     }
@@ -436,9 +436,9 @@ impl SubSubClass {
             .add_subclass(SubSubClass{val3: 20})
     }
 
-    fn method3(self_: PyRef&lt;Self&gt;) -&gt; PyResult&lt;usize&gt; {
+    fn method3(self_: PyRef&lt;'_, Self&gt;) -&gt; PyResult&lt;usize&gt; {
         let v = self_.val3;
-        let super_ = self_.into_super();  // Get PyRef&lt;SubClass&gt;
+        let super_ = self_.into_super();  // Get PyRef&lt;'_, SubClass&gt;
         SubClass::method2(super_).map(|x| x * v)
     }
 }
@@ -473,7 +473,7 @@ impl DictWithCounter {
     fn new() -&gt; Self {
         Self::default()
     }
-    fn set(mut self_: PyRefMut&lt;Self&gt;, key: String, value: &amp;PyAny) -&gt; PyResult&lt;()&gt; {
+    fn set(mut self_: PyRefMut&lt;'_, Self&gt;, key: String, value: &amp;PyAny) -&gt; PyResult&lt;()&gt; {
         self_.counter.entry(key.clone()).or_insert(0);
         let py = self_.py();
         let dict: &amp;PyDict = unsafe { py.from_borrowed_ptr_or_err(self_.as_ptr())? };
@@ -664,7 +664,7 @@ gets injected by the method wrapper, e.g.</p>
 </span><span class="boring">}
 </span>#[pymethods]
 impl MyClass {
-    fn method2(&amp;self, py: Python) -&gt; PyResult&lt;i32&gt; {
+    fn method2(&amp;self, py: Python&lt;'_&gt;) -&gt; PyResult&lt;i32&gt; {
         Ok(10)
     }
 }
@@ -1092,7 +1092,7 @@ unsafe impl pyo3::PyTypeInfo for MyClass {
     const MODULE: Option&lt;&amp;'static str&gt; = None;
 
     #[inline]
-    fn type_object_raw(py: pyo3::Python) -&gt; *mut pyo3::ffi::PyTypeObject {
+    fn type_object_raw(py: pyo3::Python&lt;'_&gt;) -&gt; *mut pyo3::ffi::PyTypeObject {
         use pyo3::type_object::LazyStaticType;
         static TYPE_OBJECT: LazyStaticType = LazyStaticType::new();
         TYPE_OBJECT.get_or_init::&lt;Self&gt;(py)
@@ -1106,7 +1106,7 @@ impl pyo3::pyclass::PyClass for MyClass {
 }
 
 impl pyo3::IntoPy&lt;PyObject&gt; for MyClass {
-    fn into_py(self, py: pyo3::Python) -&gt; pyo3::PyObject {
+    fn into_py(self, py: pyo3::Python&lt;'_&gt;) -&gt; pyo3::PyObject {
         pyo3::IntoPy::into_py(pyo3::Py::new(py, self).unwrap(), py)
     }
 }

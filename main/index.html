@@ -223,7 +223,7 @@ fn sum_as_string(a: usize, b: usize) -&gt; PyResult&lt;String&gt; {
 /// the `lib.name` setting in the `Cargo.toml`, else Python will not be able to
 /// import the module.
 #[pymodule]
-fn string_sum(_py: Python, m: &amp;PyModule) -&gt; PyResult&lt;()&gt; {
+fn string_sum(_py: Python&lt;'_&gt;, m: &amp;PyModule) -&gt; PyResult&lt;()&gt; {
     m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
     Ok(())
 }

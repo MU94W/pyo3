@@ -166,8 +166,8 @@
 given signatures should be interpreted as follows:</p>
 <ul>
 <li>All methods take a receiver as first argument, shown as <code>&lt;self&gt;</code>. It can be
-<code>&amp;self</code>, <code>&amp;mut self</code> or a <code>PyCell</code> reference like <code>self_: PyRef&lt;Self&gt;</code> and
-<code>self_: PyRefMut&lt;Self&gt;</code>, as described <a href="../class.html#inheritance">here</a>.</li>
+<code>&amp;self</code>, <code>&amp;mut self</code> or a <code>PyCell</code> reference like <code>self_: PyRef&lt;'_, Self&gt;</code> and
+<code>self_: PyRefMut&lt;'_, Self&gt;</code>, as described <a href="../class.html#inheritance">here</a>.</li>
 <li>An optional <code>Python&lt;'py&gt;</code> argument is always allowed as the first argument.</li>
 <li>Return values can be optionally wrapped in <code>PyResult</code>.</li>
 <li><code>object</code> means that any type is allowed that can be extracted from a Python
@@ -272,10 +272,10 @@ struct MyIterator {
 
 #[pymethods]
 impl MyIterator {
-    fn __iter__(slf: PyRef&lt;Self&gt;) -&gt; PyRef&lt;Self&gt; {
+    fn __iter__(slf: PyRef&lt;'_, Self&gt;) -&gt; PyRef&lt;'_, Self&gt; {
         slf
     }
-    fn __next__(mut slf: PyRefMut&lt;Self&gt;) -&gt; Option&lt;PyObject&gt; {
+    fn __next__(mut slf: PyRefMut&lt;'_, Self&gt;) -&gt; Option&lt;PyObject&gt; {
         slf.iter.next()
     }
 }
@@ -297,11 +297,11 @@ struct Iter {
 
 #[pymethods]
 impl Iter {
-    fn __iter__(slf: PyRef&lt;Self&gt;) -&gt; PyRef&lt;Self&gt; {
+    fn __iter__(slf: PyRef&lt;'_, Self&gt;) -&gt; PyRef&lt;'_, Self&gt; {
         slf
     }
 
-    fn __next__(mut slf: PyRefMut&lt;Self&gt;) -&gt; Option&lt;usize&gt; {
+    fn __next__(mut slf: PyRefMut&lt;'_, Self&gt;) -&gt; Option&lt;usize&gt; {
         slf.inner.next()
     }
 }
@@ -313,7 +313,7 @@ struct Container {
 
 #[pymethods]
 impl Container {
-    fn __iter__(slf: PyRef&lt;Self&gt;) -&gt; PyResult&lt;Py&lt;Iter&gt;&gt; {
+    fn __iter__(slf: PyRef&lt;'_, Self&gt;) -&gt; PyResult&lt;Py&lt;Iter&gt;&gt; {
         let iter = Iter {
             inner: slf.iter.clone().into_iter(),
         };
@@ -505,7 +505,7 @@ object.  <code>__clear__</code> must clear out any mutable references to other P
 objects (thus breaking reference cycles). Immutable references do not have to be
 cleared, as every cycle must contain at least one mutable reference.</p>
 <ul>
-<li><code>__traverse__(&lt;self&gt;, pyo3::class::gc::PyVisit) -&gt; Result&lt;(), pyo3::class::gc::PyTraverseError&gt;</code></li>
+<li><code>__traverse__(&lt;self&gt;, pyo3::class::gc::PyVisit&lt;'_&gt;) -&gt; Result&lt;(), pyo3::class::gc::PyTraverseError&gt;</code></li>
 <li><code>__clear__(&lt;self&gt;) -&gt; ()</code></li>
 </ul>
 <p>Example:</p>
@@ -523,7 +523,7 @@ struct ClassWithGCSupport {
 
 #[pymethods]
 impl ClassWithGCSupport {
-    fn __traverse__(&amp;self, visit: PyVisit) -&gt; Result&lt;(), PyTraverseError&gt; {
+    fn __traverse__(&amp;self, visit: PyVisit&lt;'_&gt;) -&gt; Result&lt;(), PyTraverseError&gt; {
         if let Some(obj) = &amp;self.obj {
             visit.call(obj)?
         }
@@ -717,10 +717,10 @@ for the <code>__getitem__()</code> method.</p>
 <p>Iterators can be defined using the <a href="https://pyo3.rs/main/doc/pyo3/class/iter/trait.PyIterProtocol.html"><code>PyIterProtocol</code></a> trait.
 It includes two methods <code>__iter__</code> and <code>__next__</code>:</p>
 <ul>
-<li><code>fn __iter__(slf: PyRefMut&lt;Self&gt;) -&gt; PyResult&lt;impl IntoPy&lt;PyObject&gt;&gt;</code></li>
-<li><code>fn __next__(slf: PyRefMut&lt;Self&gt;) -&gt; PyResult&lt;Option&lt;impl IntoPy&lt;PyObject&gt;&gt;&gt;</code></li>
+<li><code>fn __iter__(slf: PyRefMut&lt;'_, Self&gt;) -&gt; PyResult&lt;impl IntoPy&lt;PyObject&gt;&gt;</code></li>
+<li><code>fn __next__(slf: PyRefMut&lt;'_, Self&gt;) -&gt; PyResult&lt;Option&lt;impl IntoPy&lt;PyObject&gt;&gt;&gt;</code></li>
 </ul>
-<p>These two methods can be take either <code>PyRef&lt;Self&gt;</code> or <code>PyRefMut&lt;Self&gt;</code> as their
+<p>These two methods can be take either <code>PyRef&lt;'_, Self&gt;</code> or <code>PyRefMut&lt;'_, Self&gt;</code> as their
 first argument, so that mutable borrow can be avoided if needed.</p>
 <p>For details, look at the <code>#[pymethods]</code> regarding iterator methods.</p>
 <h4 id="garbage-collector-integration-1"><a class="header" href="#garbage-collector-integration-1">Garbage Collector Integration</a></h4>

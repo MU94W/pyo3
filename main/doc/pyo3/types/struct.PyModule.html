@@ -80,7 +80,7 @@ creating one if needed.</p>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">pyo3::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="attribute">#[<span class="ident">pymodule</span>]</span>
-<span class="kw">fn</span> <span class="ident">my_module</span>(<span class="ident">_py</span>: <span class="ident">Python</span>, <span class="ident">module</span>: <span class="kw-2">&amp;</span><span class="ident">PyModule</span>) -&gt; <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">my_module</span>(<span class="ident">_py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>, <span class="ident">module</span>: <span class="kw-2">&amp;</span><span class="ident">PyModule</span>) -&gt; <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="ident">module</span>.<span class="ident">add</span>(<span class="string">&quot;c&quot;</span>, <span class="number">299_792_458</span>)<span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(())
 }</code></pre></div>
@@ -100,7 +100,7 @@ Instead, this method is <em>generic</em>, and requires us to use the
 <span class="kw">struct</span> <span class="ident">Foo</span> { <span class="comment">/* fields omitted */</span> }
 
 <span class="attribute">#[<span class="ident">pymodule</span>]</span>
-<span class="kw">fn</span> <span class="ident">my_module</span>(<span class="ident">_py</span>: <span class="ident">Python</span>, <span class="ident">module</span>: <span class="kw-2">&amp;</span><span class="ident">PyModule</span>) -&gt; <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">my_module</span>(<span class="ident">_py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>, <span class="ident">module</span>: <span class="kw-2">&amp;</span><span class="ident">PyModule</span>) -&gt; <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="ident">module</span>.<span class="ident">add_class</span>::<span class="op">&lt;</span><span class="ident">Foo</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(())
 }</code></pre></div>
@@ -117,7 +117,7 @@ anything that can return instances of <code>Foo</code>).</p>
 <span>52</span>
 <span>53</span>
 <span>54</span>
-</pre><pre class="rust"><code><span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">decorator</span>(<span class="ident">_py</span>: <span class="ident">Python</span>, <span class="ident">module</span>: <span class="kw-2">&amp;</span><span class="ident">PyModule</span>) -&gt; <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+</pre><pre class="rust"><code><span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">decorator</span>(<span class="ident">_py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>, <span class="ident">module</span>: <span class="kw-2">&amp;</span><span class="ident">PyModule</span>) -&gt; <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="ident">module</span>.<span class="highlight focus"><span class="ident">add_class</span>::<span class="op">&lt;</span><span class="ident">PyCounter</span><span class="op">&gt;</span>()</span><span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(())
 }</code></pre></div>
@@ -133,7 +133,7 @@ For more information, see <a href="https://github.com/PyO3/pyo3/issues/759">#759
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">pyo3::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="attribute">#[<span class="ident">pymodule</span>]</span>
-<span class="kw">fn</span> <span class="ident">my_module</span>(<span class="ident">py</span>: <span class="ident">Python</span>, <span class="ident">module</span>: <span class="kw-2">&amp;</span><span class="ident">PyModule</span>) -&gt; <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">my_module</span>(<span class="ident">py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>, <span class="ident">module</span>: <span class="kw-2">&amp;</span><span class="ident">PyModule</span>) -&gt; <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">submodule</span> <span class="op">=</span> <span class="ident">PyModule::new</span>(<span class="ident">py</span>, <span class="string">&quot;submodule&quot;</span>)<span class="question-mark">?</span>;
     <span class="ident">submodule</span>.<span class="ident">add</span>(<span class="string">&quot;super_useful_constant&quot;</span>, <span class="string">&quot;important&quot;</span>)<span class="question-mark">?</span>;
 
@@ -156,7 +156,7 @@ to wrap a function annotated with <a href="../attr.pyfunction.html"><code>#[pyfu
     <span class="macro">println!</span>(<span class="string">&quot;Hello world!&quot;</span>)
 }
 <span class="attribute">#[<span class="ident">pymodule</span>]</span>
-<span class="kw">fn</span> <span class="ident">my_module</span>(<span class="ident">_py</span>: <span class="ident">Python</span>, <span class="ident">module</span>: <span class="kw-2">&amp;</span><span class="ident">PyModule</span>) -&gt; <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">my_module</span>(<span class="ident">_py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>, <span class="ident">module</span>: <span class="kw-2">&amp;</span><span class="ident">PyModule</span>) -&gt; <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="ident">module</span>.<span class="ident">add_function</span>(<span class="macro">wrap_pyfunction!</span>(<span class="ident">say_hello</span>, <span class="ident">module</span>)<span class="question-mark">?</span>)
 }</code></pre></div>
 <p>Python code can then do the following:</p>

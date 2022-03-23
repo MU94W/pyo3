@@ -1795,7 +1795,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// # fn main(){</span>
     <span class="doccomment">/// #[pyfunction]</span>
-    <span class="doccomment">/// fn loop_forever(py: Python) -&gt; PyResult&lt;()&gt; {</span>
+    <span class="doccomment">/// fn loop_forever(py: Python&lt;&#39;_&gt;) -&gt; PyResult&lt;()&gt; {</span>
     <span class="doccomment">///     loop {</span>
     <span class="doccomment">///         // As this loop is infinite it should check for signals every once in a while.</span>
     <span class="doccomment">///         // Using `?` causes any `PyErr` (potentially containing `KeyboardInterrupt`)</span>

@@ -450,6 +450,7 @@
 <span id="445">445</span>
 <span id="446">446</span>
 <span id="447">447</span>
+<span id="448">448</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Raw FFI declarations for Python&#39;s C API.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! PyO3 can be used to write native Python modules or run Python code and modules from Rust.</span>
@@ -704,6 +705,7 @@
     <span class="ident">clippy::upper_case_acronyms</span>,
     <span class="ident">clippy::missing_safety_doc</span>
 )]</span>
+<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">elided_lifetimes_in_paths</span>, <span class="ident">unused_lifetimes</span>)]</span>
 
 <span class="comment">// Until `extern type` is stabilized, use the recommended approach to</span>
 <span class="comment">// model opaque types:</span>
