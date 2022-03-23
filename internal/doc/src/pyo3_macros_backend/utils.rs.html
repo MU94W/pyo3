@@ -331,7 +331,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">syn::parse::Parse</span> <span class="kw">for</span> <span class="ident">DocArgs</span> {
-    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">syn::parse::ParseStream</span>) -&gt; <span class="ident">syn::Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">syn::parse::ParseStream</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">syn::Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">this</span> <span class="op">=</span> <span class="self">Self</span> {
             <span class="ident">_eq_token</span>: <span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>,
             <span class="ident">token_stream</span>: <span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>,

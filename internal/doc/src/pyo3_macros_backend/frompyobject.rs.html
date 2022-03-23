@@ -934,7 +934,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Parse</span> <span class="kw">for</span> <span class="ident">ContainerPyO3Attribute</span> {
-    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">lookahead</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">lookahead1</span>();
         <span class="kw">if</span> <span class="ident">lookahead</span>.<span class="ident">peek</span>(<span class="ident">attributes::kw::transparent</span>) {
             <span class="kw">let</span> <span class="ident">kw</span>: <span class="ident">attributes::kw::transparent</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
@@ -1007,7 +1007,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Parse</span> <span class="kw">for</span> <span class="ident">FieldPyO3Attribute</span> {
-    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">lookahead</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">lookahead1</span>();
         <span class="kw">if</span> <span class="ident">lookahead</span>.<span class="ident">peek</span>(<span class="ident">attributes::kw::attribute</span>) {
             <span class="kw">let</span> <span class="kw">_</span>: <span class="ident">attributes::kw::attribute</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;

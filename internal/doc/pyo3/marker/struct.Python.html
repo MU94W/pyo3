@@ -257,7 +257,7 @@ as part of long-running Rust functions so that users can cancel it.</p>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">pyo3::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="attribute">#[<span class="ident">pyfunction</span>]</span>
-<span class="kw">fn</span> <span class="ident">loop_forever</span>(<span class="ident">py</span>: <span class="ident">Python</span>) -&gt; <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">loop_forever</span>(<span class="ident">py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="kw">loop</span> {
         <span class="comment">// As this loop is infinite it should check for signals every once in a while.</span>
         <span class="comment">// Using `?` causes any `PyErr` (potentially containing `KeyboardInterrupt`)</span>

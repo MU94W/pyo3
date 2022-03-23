@@ -634,7 +634,7 @@
     <span class="doccomment">/// use pyo3::prelude::*;</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// #[pymodule]</span>
-    <span class="doccomment">/// fn my_module(_py: Python, module: &amp;PyModule) -&gt; PyResult&lt;()&gt; {</span>
+    <span class="doccomment">/// fn my_module(_py: Python&lt;&#39;_&gt;, module: &amp;PyModule) -&gt; PyResult&lt;()&gt; {</span>
     <span class="doccomment">///     module.add(&quot;c&quot;, 299_792_458)?;</span>
     <span class="doccomment">///     Ok(())</span>
     <span class="doccomment">/// }</span>
@@ -678,7 +678,7 @@
     <span class="doccomment">/// struct Foo { /* fields omitted */ }</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// #[pymodule]</span>
-    <span class="doccomment">/// fn my_module(_py: Python, module: &amp;PyModule) -&gt; PyResult&lt;()&gt; {</span>
+    <span class="doccomment">/// fn my_module(_py: Python&lt;&#39;_&gt;, module: &amp;PyModule) -&gt; PyResult&lt;()&gt; {</span>
     <span class="doccomment">///     module.add_class::&lt;Foo&gt;()?;</span>
     <span class="doccomment">///     Ok(())</span>
     <span class="doccomment">/// }</span>
@@ -737,7 +737,7 @@
     <span class="doccomment">/// use pyo3::prelude::*;</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// #[pymodule]</span>
-    <span class="doccomment">/// fn my_module(py: Python, module: &amp;PyModule) -&gt; PyResult&lt;()&gt; {</span>
+    <span class="doccomment">/// fn my_module(py: Python&lt;&#39;_&gt;, module: &amp;PyModule) -&gt; PyResult&lt;()&gt; {</span>
     <span class="doccomment">///     let submodule = PyModule::new(py, &quot;submodule&quot;)?;</span>
     <span class="doccomment">///     submodule.add(&quot;super_useful_constant&quot;, &quot;important&quot;)?;</span>
     <span class="doccomment">///</span>
@@ -780,7 +780,7 @@
     <span class="doccomment">///     println!(&quot;Hello world!&quot;)</span>
     <span class="doccomment">/// }</span>
     <span class="doccomment">/// #[pymodule]</span>
-    <span class="doccomment">/// fn my_module(_py: Python, module: &amp;PyModule) -&gt; PyResult&lt;()&gt; {</span>
+    <span class="doccomment">/// fn my_module(_py: Python&lt;&#39;_&gt;, module: &amp;PyModule) -&gt; PyResult&lt;()&gt; {</span>
     <span class="doccomment">///     module.add_function(wrap_pyfunction!(say_hello, module)?)</span>
     <span class="doccomment">/// }</span>
     <span class="doccomment">/// ```</span>

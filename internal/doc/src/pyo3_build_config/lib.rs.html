@@ -227,12 +227,17 @@
 <span id="222">222</span>
 <span id="223">223</span>
 <span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Configuration used by PyO3 for conditional support of varying Python versions.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! This crate exposes functionality to be called from build scripts to simplify building crates</span>
 <span class="doccomment">//! which depend on PyO3.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! It used internally by the PyO3 crate&#39;s build script to apply the same configuration.</span>
+
+<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">elided_lifetimes_in_paths</span>, <span class="ident">unused_lifetimes</span>)]</span>
 
 <span class="kw">mod</span> <span class="ident">errors</span>;
 <span class="kw">mod</span> <span class="ident">impl_</span>;
@@ -290,12 +295,13 @@
 <span class="doccomment">/// Loads the configuration determined from the build environment.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Because this will never change in a given compilation run, this is cached in a `once_cell`.</span>
-<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;resolve-config&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>() -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">InterpreterConfig</span> {
     <span class="kw">static</span> <span class="ident">CONFIG</span>: <span class="ident">OnceCell</span><span class="op">&lt;</span><span class="ident">InterpreterConfig</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">OnceCell::new</span>();
     <span class="ident">CONFIG</span>.<span class="ident">get_or_init</span>(<span class="op">|</span><span class="op">|</span> {
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">CONFIG_FILE</span>.<span class="ident">is_empty</span>() {
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">interpreter_config</span>) <span class="op">=</span> <span class="ident">InterpreterConfig::from_cargo_dep_env</span>() {
+            <span class="ident">interpreter_config</span>
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">CONFIG_FILE</span>.<span class="ident">is_empty</span>() {
             <span class="ident">InterpreterConfig::from_reader</span>(<span class="ident">Cursor::new</span>(<span class="ident">CONFIG_FILE</span>))
         } <span class="kw">else</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">ABI3_CONFIG</span>.<span class="ident">is_empty</span>() {
             <span class="prelude-val">Ok</span>(<span class="ident">abi3_config</span>())
@@ -304,7 +310,7 @@
         } <span class="kw">else</span> {
             <span class="ident">InterpreterConfig::from_reader</span>(<span class="ident">Cursor::new</span>(<span class="ident">HOST_CONFIG</span>))
         }
-        .<span class="ident">expect</span>(<span class="string">&quot;failed to parse PyO3 config file&quot;</span>)
+        .<span class="ident">expect</span>(<span class="string">&quot;failed to parse PyO3 config&quot;</span>)
     })
 }
 

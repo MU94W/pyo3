@@ -244,7 +244,7 @@
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">ToPyObject</span>,
     {
-        <span class="kw">fn</span> <span class="ident">into_py</span>(<span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>) -&gt; <span class="ident">PyObject</span> {
+        <span class="kw">fn</span> <span class="ident">into_py</span>(<span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">PyObject</span> {
             <span class="self">self</span>.<span class="ident">as_ref</span>().<span class="ident">to_object</span>(<span class="ident">py</span>)
         }
     }
@@ -384,7 +384,7 @@
                 <span class="kw">where</span>
                     <span class="ident">T</span>: <span class="ident">ToPyObject</span>
                 {
-                    <span class="kw">fn</span> <span class="ident">into_py</span>(<span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>) -&gt; <span class="ident">PyObject</span> {
+                    <span class="kw">fn</span> <span class="ident">into_py</span>(<span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">PyObject</span> {
                         <span class="self">self</span>.<span class="ident">as_ref</span>().<span class="ident">to_object</span>(<span class="ident">py</span>)
                     }
                 }
