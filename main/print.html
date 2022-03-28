@@ -7216,10 +7216,12 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <ul>
 <li>Allow dependent crates to access config values from <code>pyo3-build-config</code> via cargo link dep env vars. <a href="https://github.com/PyO3/pyo3/pull/2092">#2092</a></li>
 <li>Added methods on <code>InterpreterConfig</code> to run Python scripts using the configured executable. <a href="https://github.com/PyO3/pyo3/pull/2092">#2092</a></li>
+<li>Added FFI definitions for <code>PyType_FromModuleAndSpec</code>, <code>PyType_GetModule</code>, <code>PyType_GetModuleState</code> and <code>PyModule_AddType</code>. <a href="https://github.com/PyO3/pyo3/pull/2250">#2250</a></li>
 </ul>
 <h3 id="changed"><a class="header" href="#changed">Changed</a></h3>
 <ul>
 <li>Allow <code>#[pyo3(crate = &quot;...&quot;, text_signature = &quot;...&quot;)]</code> options to be used directly in <code>#[pyclass(crate = &quot;...&quot;, text_signature = &quot;...&quot;)]</code>. <a href="https://github.com/PyO3/pyo3/pull/2234">#2234</a></li>
+<li>Mark <code>METH_FASTCALL</code> calling convention as limited API on Python 3.10. <a href="https://github.com/PyO3/pyo3/pull/2250">#2250</a></li>
 </ul>
 <h3 id="fixed"><a class="header" href="#fixed">Fixed</a></h3>
 <ul>
