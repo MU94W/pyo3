@@ -990,7 +990,6 @@
 <span id="985">985</span>
 <span id="986">986</span>
 <span id="987">987</span>
-<span id="988">988</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright (c) 2017-present PyO3 Project and Contributors</span>
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::conversion</span>::{<span class="ident">PyTryFrom</span>, <span class="ident">ToBorrowedObject</span>};
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::err</span>::{<span class="self">self</span>, <span class="ident">PyDowncastError</span>, <span class="ident">PyErr</span>, <span class="ident">PyResult</span>};
@@ -1161,7 +1160,6 @@
 <span class="doccomment">/// [`Py::clone_ref`] will be faster if you happen to be already holding the GIL.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```rust</span>
-<span class="doccomment">/// use pyo3::conversion::AsPyPointer;</span>
 <span class="doccomment">/// use pyo3::prelude::*;</span>
 <span class="doccomment">/// use pyo3::types::PyDict;</span>
 <span class="doccomment">///</span>
@@ -1179,9 +1177,9 @@
 <span class="doccomment">///     drop(first);</span>
 <span class="doccomment">///</span>
 <span class="doccomment">///     // They all point to the same object</span>
-<span class="doccomment">///     assert_eq!(second.as_ptr(), third.as_ptr());</span>
-<span class="doccomment">///     assert_eq!(fourth.as_ptr(), fifth.as_ptr());</span>
-<span class="doccomment">///     assert_eq!(second.as_ptr(), fourth.as_ptr());</span>
+<span class="doccomment">///     assert!(second.is(&amp;third));</span>
+<span class="doccomment">///     assert!(fourth.is(&amp;fifth));</span>
+<span class="doccomment">///     assert!(second.is(&amp;fourth));</span>
 <span class="doccomment">/// });</span>
 <span class="doccomment">/// # }</span>
 <span class="doccomment">/// ```</span>
@@ -1190,8 +1188,8 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// It is easy to accidentally create reference cycles using [`Py`]`&lt;T&gt;`.</span>
 <span class="doccomment">/// The Python interpreter can break these reference cycles within pyclasses if they</span>
-<span class="doccomment">/// implement the [`PyGCProtocol`](crate::class::gc::PyGCProtocol). If your pyclass</span>
-<span class="doccomment">/// contains other Python objects you should implement this protocol to avoid leaking memory.</span>
+<span class="doccomment">/// [integrate with the garbage collector][gc]. If your pyclass contains other Python</span>
+<span class="doccomment">/// objects you should implement it to avoid leaking memory.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # A note on Python reference counts</span>
 <span class="doccomment">///</span>
@@ -1213,6 +1211,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// [`Rc`]: std::rc::Rc</span>
 <span class="doccomment">/// [`RefCell`]: std::cell::RefCell</span>
+<span class="doccomment">/// [gc]: https://pyo3.rs/main/class/protocols.html#garbage-collector-integration</span>
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Py</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">ffi::PyObject</span><span class="op">&gt;</span>, <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>);
 
@@ -1480,7 +1479,6 @@
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// use pyo3::conversion::AsPyPointer;</span>
     <span class="doccomment">/// use pyo3::prelude::*;</span>
     <span class="doccomment">/// use pyo3::types::PyDict;</span>
     <span class="doccomment">///</span>
@@ -1490,7 +1488,7 @@
     <span class="doccomment">///     let second = Py::clone_ref(&amp;first, py);</span>
     <span class="doccomment">///</span>
     <span class="doccomment">///     // Both point to the same object</span>
-    <span class="doccomment">///     assert_eq!(first.as_ptr(), second.as_ptr());</span>
+    <span class="doccomment">///     assert!(first.is(&amp;second));</span>
     <span class="doccomment">/// });</span>
     <span class="doccomment">/// # }</span>
     <span class="doccomment">/// ```</span>
